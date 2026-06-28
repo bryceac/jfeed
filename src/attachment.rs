@@ -65,8 +65,8 @@ impl AttachmentBuilder {
         self
     }
 
-    pub fn build(&self) -> Result<Attachment, Error> {
-        match (self.url, self.mime_type) {
+    pub fn build(&self) -> Result<Attachment, AttachmentBuildError> {
+        match (self.url.clone(), self.mime_type.clone()) {
             (None, Some(_)) => Err(AttachmentBuildError::URLNotFound),
             (Some(_), None) => Err(AttachmentBuildError::MimetypeNotFound),
             (None, None) => Err(AttachmentBuildError::URLAndMimetypeNotFound),
@@ -74,7 +74,7 @@ impl AttachmentBuilder {
                 Ok(parsed_url) => Ok(Attachment {
                     url: parsed_url,
                     mime_type,
-                    title: if let Some(title) = self.title {
+                    title: if let Some(title) = self.title.clone() {
                         title
                     } else {
                         String::default()
@@ -82,7 +82,7 @@ impl AttachmentBuilder {
                     size: self.size,
                     duration: self.duration
                 }),
-                Err(error) => Err(error)
+                Err(error) => Err(AttachmentBuildError::URLParseError(error))
             }
         }
     }
