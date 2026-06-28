@@ -65,7 +65,7 @@ impl AttachmentBuilder {
         self
     }
 
-    pub fn build(&self) -> Resut<Attachment, Error> {
+    pub fn build(&self) -> Result<Attachment, Error> {
         match (self.url, self.mime_type) {
             (None, Some(_)) => Err(AttachmentBuildError::URLNotFound),
             (Some(_), None) => Err(AttachmentBuildError::MimeTypeNotFound),
