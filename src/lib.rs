@@ -80,4 +80,19 @@ mod tests {
     fn author_building_fails_with_invalid_avatar() {
         assert!(Author::builder().set_avatar("mp4").build().is_err())
     }
+
+    #[test]
+    fn author_building_fails_with_name_but_invalid_url() {
+        assert!(Author::builder().set_name("Jerry").set_url("mp4").build().is_err())
+    }
+
+    #[test]
+    fn author_building_fails_with_name_but_invalid_avatar() {
+        assert!(Author::builder().set_name("Jerry").set_avatar("mp4").build().is_err())
+    }
+
+    #[test]
+    fn author_building_fails_with_name_but_invalid_urls() {
+        assert!(Author::builder().set_name("Jerry").set_url("html").set_avatar("mp4").build().is_err())
+    }
 }
