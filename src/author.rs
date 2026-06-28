@@ -16,3 +16,14 @@ pub struct Author {
 #[derive(Deserialize)]
 #[serde(transparent)]
 pub struct AuthorDes(HashMap<String, Option<String>>);
+
+impl TryFrom<AuthorDes> for Author {
+    type Error = &'static str;
+
+    fn try_from(mut value: AuthorDes) -> Result<Self, Self::Error> {
+        if value.0.is_empty() {
+            return Err("no data provided, Please provide either a name, url, or avatar at minimum.")
+        }
+        match value.0
+    }
+}
