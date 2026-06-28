@@ -76,6 +76,10 @@ impl AttachmentBuilder {
         self
     }
 
+    /**
+     * Build an attachment.
+     * If any errors occur, an AttachmentBuldError will be returned.
+     */
     pub fn build(&self) -> Result<Attachment, AttachmentBuildError> {
         match (self.url.clone(), self.mime_type.clone()) {
             (None, Some(_)) => Err(AttachmentBuildError::URLNotFound),
