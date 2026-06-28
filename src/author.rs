@@ -10,3 +10,11 @@ pub struct Author {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub avatar: Option<Url>
 }
+
+impl Deserialize for Author {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+        where
+            D: serde::Deserializer<'de> {
+        
+    }
+}
