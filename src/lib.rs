@@ -24,4 +24,13 @@ mod tests {
 
         assert!(attachment.build().is_err())
     }
+
+    #[test]
+    fn attachment_build_fails_when_mimtetype_is_missing() {
+        let mut attachment = Attachment::builder();
+        attachment.set_url("https://example.com/hello.mp4");
+        attachment.set_title("Hello, World!");
+
+        assert!(attachment.build().is_err())
+    }
 }
