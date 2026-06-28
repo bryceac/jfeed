@@ -39,13 +39,13 @@ impl TryFrom<AuthorDes> for Author {
         for key in value.0.keys() {
             match key.clone() {
                 s if s == "name" => if let Some(name) = value.0.remove(key) {
-                    builder.set_name(name);
+                    builder.set_name(&name);
                 },
                 s if s == "url" => if let Some(url) = value.0.remove(key) {
-                    builder.set_url(url);
+                    builder.set_url(&url);
                 },
                 s if s == "avatar" => if let Some(avatar_url) = value.0.remove(key) {
-                    builder.set_avatar(avatar_url);
+                    builder.set_avatar(&avatar_url);
                 },
                 _ => {}
             }
