@@ -19,3 +19,17 @@ impl fmt::Display for AttachmentBuildError {
         }
     }
 }
+
+pub enum AuthorBuildError {
+    MissingData,
+    URLParseError(ParseError)
+}
+
+impl fmt::Display for AuthorBuildError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::MissingData => write!(f, "No data found. Please provide either a name, URL, or avatar URL."),
+            Self::URLParseError(parseError) => write!(f, "{}", parseError)
+        }
+    }
+}
