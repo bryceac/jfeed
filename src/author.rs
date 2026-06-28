@@ -15,6 +15,12 @@ pub struct Author {
     pub avatar: Option<Url>
 }
 
+impl Author {
+    pub fn builder() -> AuthorBuilder {
+        AuthorBuilder::default()
+    }
+}
+
 #[derive(Deserialize)]
 #[serde(transparent)]
 pub struct AuthorDes(HashMap<String, Option<String>>);
