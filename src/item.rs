@@ -39,9 +39,3 @@ pub struct Content {
     #[serde(rename = "content_text", skip_serializing_if ="Option::is_none")]
     pub text: Option<String>
 }
-
-impl Content {
-    pub fn is_empty(content: &Self) -> bool {
-        content.html.is_none() && content.text.is_none()
-    }
-}
