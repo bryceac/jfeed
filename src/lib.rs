@@ -7,6 +7,7 @@ use crate::{
     attachment::Attachment as Attachment, 
     errors::AttachmentBuildError as AttachmentBuildError,
     errors::AuthorBuildError as AuthorBuildError,
+    errors::ContentBuildError as ContentBuildError,
     author::Author as Author 
 };
 
