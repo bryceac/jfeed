@@ -10,8 +10,8 @@ pub struct Item {
     url: Url,
     external_url: Option<Url>,
     title: Option<String>,
-    content_html: Option<String>,
-    content_text: Option<String>,
+    #[serde(flatten)]
+    content: Option<Content>,
     summary: Option<String>,
     image: Option<Url>,
     banner: Option<Url>,
@@ -20,4 +20,12 @@ pub struct Item {
     authors: Vec<Author>,
     tags: Vec<String>,
     language: Option<String>
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug)]
+pub struct Content {
+    #[serde(rename = "content_html", skip_serializing_if = "Option::is_none")]
+    pub html: Option<String>,
+    #[serde(rename = "content_text", skip_serializing_if ="Option::is_none")]
+    pub text: Option<String>
 }
