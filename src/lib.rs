@@ -10,6 +10,6 @@ mod tests {
 
     #[test]
     fn attachment_build_error_displays_correctly() {
-        assert_eq!(format!("{}", AttachmentBuildError::URLNotFound), "URL must be specified");
+        assert_eq!(format!("{}", AttachmentBuildError::URLNotFound), "URL must be specified.");
     }
 }
