@@ -77,11 +77,46 @@ impl AuthorBuilder {
                 }),
                 Err(parse_error) => Err(AuthorBuildError::URLParseError(parse_error))
             },
-            (Some(name), None, Some(avatar)) => todo!(),
-            (None, Some(url), Some(avatar)) => todo!(),
-            (Some(name), None, None) => todo!(),
-            (None, Some(url), None) => todo!(),
-            (None, None, Some(avatar)) => todo!()
+            (Some(name), None, Some(avatar)) => match Url::parse(&avatar) {
+                Ok(avatar_url) => Ok(Author {
+                    name: Some(name),
+                    url: None,
+                    avatar: Some(avatar_url)
+                }),
+                Err(parse_error) => Err(AuthorBuildError::URLParseError(parse_error))
+            },
+            (None, Some(url), Some(avatar)) => if let Err(parse_error) = Url::parse(&url) {
+                Err(AuthorBuildError::URLParseError(parse_error))
+            } else if let Err(parse_error) = Url::parse(&avatar) {
+                Err(AuthorBuildError::URLParseError(parse_error))
+            } else {
+                Ok(Author {
+                    name: None,
+                    url: Some(Url::parse(&url).unwrap()),
+                    avatar: Some(Url::parse(&avatar).unwrap())
+                })
+            },
+            (Some(name), None, None) => Ok(Author { 
+                name: Some(name), 
+                url: None, 
+                avatar: None 
+            }),
+            (None, Some(url), None) => match Url::parse(&url) {
+                Ok(author_url) => Ok(Author { 
+                    name: None, 
+                    url: Some(author_url), 
+                    avatar: None 
+                }),
+                Err(parse_error) => Err(AuthorBuildError::URLParseError(parse_error))
+            },
+            (None, None, Some(avatar)) => match Url::parse(&avatar) {
+                Ok(avatar_url) => Ok(Author { 
+                    name: None, 
+                    url: None, 
+                    avatar: Some(avatar_url) 
+                }),
+                Err(parse_error) => Err(AuthorBuildError::URLParseError(parse_error))
+            }
         }
     }
 }
