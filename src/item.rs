@@ -15,8 +15,8 @@ pub struct Item {
     summary: Option<String>,
     image: Option<Url>,
     banner: Option<Url>,
-    published: Option<DateTime<Local>>,
-    modified: Option<DateTime<Local>>,
+    published: Option<DateTime<Utc>>,
+    modified: Option<DateTime<Utc>>,
     authors: Vec<Author>,
     tags: Vec<String>,
     language: Option<String>
