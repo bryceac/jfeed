@@ -33,4 +33,12 @@ mod tests {
 
         assert!(attachment.build().is_err())
     }
+
+    #[test]
+    fn attachment_build_fails_when_all_required_is_missing() {
+        let mut attachment = Attachment::builder();
+        attachment.set_title("Hello, World!");
+
+        assert!(attachment.build().is_err())
+    }
 }
