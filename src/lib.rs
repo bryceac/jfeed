@@ -1,17 +1,15 @@
 mod attachment;
 mod errors;
 
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+use crate::errors::AttachmentBuildError as AttachmentBuildError;
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use pretty_assertions::assert_eq;
 
     #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    fn attachment_build_error_displays_correctly() {
+        assert_eq!(format!("{}", AttachmentBuildError::URLNotFound), "URL must be specified");
     }
 }
