@@ -1,6 +1,7 @@
 use chrono::prelude::*;
 use serde::{ Serialize, Deserialize };
 use url::Url;
+use crate::Author;
 
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -16,7 +17,7 @@ pub struct Item {
     banner: Option<Url>,
     published: Option<DateTime<Local>>,
     modified: Option<DateTime<Local>>,
-    authors: Vec<String>,
+    authors: Vec<Author>,
     tags: Vec<String>,
     language: Option<String>
 }

@@ -5,7 +5,7 @@ use url::Url;
 
 use crate::AuthorBuildError;
 
-#[derive(Serialize, Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(try_from = "AuthorDes")]
 pub struct Author {
     #[serde(skip_serializing_if = "Option::is_none")]
