@@ -37,6 +37,16 @@ impl Attachment {
     }
 }
 
+impl PartialEq for Attachment {
+    fn eq(&self, other: &Self) -> bool {
+        self.url == other.url &&
+        self.mime_type == other.mime_type &&
+        self.title == other.title &&
+        self.size == other.size &&
+        self.duration == other.duration
+    } 
+}
+
 /**
  * A convenience building type, to make it easy to create an attacment.
  */
