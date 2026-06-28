@@ -68,31 +68,100 @@ mod tests {
 
     #[test]
     fn author_building_fails_with_no_data() {
-        assert!(Author::builder().build().is_err())
+        assert!(Author::builder()
+        .build().is_err())
     }
 
     #[test]
     fn author_building_fails_with_invalid_url() {
-        assert!(Author::builder().set_url("mp4").build().is_err())
+        assert!(Author::builder()
+        .set_url("mp4").build().is_err())
     }
 
     #[test]
     fn author_building_fails_with_invalid_avatar() {
-        assert!(Author::builder().set_avatar("mp4").build().is_err())
+        assert!(Author::builder()
+        .set_avatar("mp4")
+        .build().is_err())
     }
 
     #[test]
     fn author_building_fails_with_name_but_invalid_url() {
-        assert!(Author::builder().set_name("Jerry").set_url("mp4").build().is_err())
+        assert!(Author::builder()
+        .set_name("Jerry")
+        .set_url("mp4")
+        .build().is_err())
     }
 
     #[test]
     fn author_building_fails_with_name_but_invalid_avatar() {
-        assert!(Author::builder().set_name("Jerry").set_avatar("mp4").build().is_err())
+        assert!(Author::builder()
+        .set_name("Jerry")
+        .set_avatar("mp4")
+        .build().is_err())
     }
 
     #[test]
     fn author_building_fails_with_name_but_invalid_urls() {
-        assert!(Author::builder().set_name("Jerry").set_url("html").set_avatar("mp4").build().is_err())
+        assert!(Author::builder()
+        .set_name("Jerry")
+        .set_url("html")
+        .set_avatar("mp4")
+        .build().is_err())
+    }
+
+    #[test]
+    fn create_author_with_only_name() {
+        assert!(Author::builder()
+        .set_name("Jerry")
+        .build().is_ok())
+    }
+
+    #[test]
+    fn create_author_with_only_url() {
+        assert!(Author::builder()
+        .set_url("https://example.com")
+        .build().is_ok())
+    }
+
+    #[test]
+    fn create_author_with_only_avatar() {
+        assert!(Author::builder()
+        .set_avatar("https://example.com/jerry.png")
+        .build().is_ok())
+    }
+
+    #[test]
+    fn create_author_with_only_url_and_avatar() {
+        assert!(Author::builder()
+        .set_url("https://example.com")
+        .set_avatar("https://example.com/jerry.png")
+        .build().is_ok())
+    }
+
+    #[test]
+    fn create_author_with_only_url_and_name() {
+        assert!(Author::builder()
+        .set_url("https://example.com")
+        .set_name("Jerry")
+        .build().is_ok())
+    }
+
+    #[test]
+    fn create_author_with_only_name_and_avatar() {
+        assert!(Author::builder()
+        .set_name("Jerry")
+        .set_avatar("https://example.com/jerry.png")
+        .build().is_ok())
+    }
+
+    #[test]
+    fn create_author_with_all_properties() {
+        let mut builder = Author::builder();
+        builder.set_name("Jerry");
+        builder.set_url("https://example.com");
+        builder.set_avatar("https://example.com/jerry.png");
+
+    assert!(builder.build().is_ok())
     }
 }
