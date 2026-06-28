@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use chrono::prelude::*;
 use serde::{ Serialize, Deserialize };
 use url::Url;
-use crate::Author;
+use crate::{Author, ContentBuildError};
 
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -59,7 +59,7 @@ impl ContentBuilder {
         self
     }
 
-    pub fn build(&self) -> Content {
+    pub fn build(&self) -> Result<Content, ContentBuildError> {
         Content { html: (), text: () }
     }
 }
