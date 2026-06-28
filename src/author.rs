@@ -27,3 +27,27 @@ impl TryFrom<AuthorDes> for Author {
         match value.0
     }
 }
+
+#[derive(Default)]
+pub struct AuthorBuilder {
+    name: Option<String>,
+    url: Option<String>,
+    avatar: Option<String>
+}
+
+impl AuthorBuilder {
+    pub fn set_name(&mut self, name: &str) -> &mut Self {
+        self.name = Some(name.to_owned());
+        self
+    }
+
+    pub fn set_url(&mut self, url: &str) -> &mut Self {
+        self.url = Some(url.to_owned());
+        self
+    }
+
+    pub fn set_avatar(&mut self, avatar: &str) -> &mut Self {
+        self.avatar = Some(avatar.to_owned());
+        self
+    }
+}
