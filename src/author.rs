@@ -35,10 +35,22 @@ impl TryFrom<AuthorDes> for Author {
 
         let mut builder = Author::builder();
 
-        for key in value.0 {
-
+        for key in value.0.keys() {
+            match key.clone() {
+                s if s == "name" => if let Some(name) = value.remove(key) {
+                    builder.set_name(name);
+                },
+                s if s == "url" => if let Some(url) = value.remove(key) {
+                    builder.set_url(url);
+                },
+                s if s == "avatar" => if let Some(avatar_url) = value.remove(key) {
+                    builder.set_avatar(avatar_url);
+                },
+                _ => {}
+            }
         }
-        match value.0
+
+        builder.build()
     }
 }
 
