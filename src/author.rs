@@ -6,6 +6,7 @@ use url::Url;
 use crate::AuthorBuildError;
 
 #[derive(Serialize, Deserialize, Clone)]
+#[serde(try_from = "AuthorDes")]
 pub struct Author {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
@@ -37,13 +38,13 @@ impl TryFrom<AuthorDes> for Author {
 
         for key in value.0.keys() {
             match key.clone() {
-                s if s == "name" => if let Some(name) = value.remove(key) {
+                s if s == "name" => if let Some(name) = value.0.remove(key) {
                     builder.set_name(name);
                 },
-                s if s == "url" => if let Some(url) = value.remove(key) {
+                s if s == "url" => if let Some(url) = value.0.remove(key) {
                     builder.set_url(url);
                 },
-                s if s == "avatar" => if let Some(avatar_url) = value.remove(key) {
+                s if s == "avatar" => if let Some(avatar_url) = value.0.remove(key) {
                     builder.set_avatar(avatar_url);
                 },
                 _ => {}
