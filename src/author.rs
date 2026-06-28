@@ -23,14 +23,20 @@ impl Author {
 
 #[derive(Deserialize)]
 #[serde(transparent)]
-pub struct AuthorDes(HashMap<String, Option<String>>);
+pub struct AuthorDes(HashMap<String, String>);
 
 impl TryFrom<AuthorDes> for Author {
-    type Error = &'static str;
+    type Error = AuthorBuildError;
 
     fn try_from(mut value: AuthorDes) -> Result<Self, Self::Error> {
         if value.0.is_empty() {
-            return Err("no data provided, Please provide either a name, url, or avatar at minimum.")
+            return Err(AuthorBuildError::MissingData)
+        }
+
+        let mut builder = Author::builder();
+
+        for key in value.0 {
+
         }
         match value.0
     }
