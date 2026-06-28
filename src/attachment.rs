@@ -68,10 +68,10 @@ impl AttachmentBuilder {
     pub fn build(&self) -> Result<Attachment, Error> {
         match (self.url, self.mime_type) {
             (None, Some(_)) => Err(AttachmentBuildError::URLNotFound),
-            (Some(_), None) => Err(AttachmentBuildError::MimeTypeNotFound),
+            (Some(_), None) => Err(AttachmentBuildError::MimetypeNotFound),
             (None, None) => Err(AttachmentBuildError::URLAndMimetypeNotFound),
-            (Some(url), Some(mime_type)) => if let Ok(parsed_url) = Url::parse(&url) {
-                Ok(Attachment {
+            (Some(url), Some(mime_type)) => match Url::parse(&url) {
+                Ok(parsed_url) => Ok(Attachment {
                     url: parsed_url,
                     mime_type,
                     title: if let Some(title) = self.title {
@@ -81,7 +81,8 @@ impl AttachmentBuilder {
                     },
                     size: self.size,
                     duration: self.duration
-                })
+                }),
+                Err(error) => Err(error)
             }
         }
     }
