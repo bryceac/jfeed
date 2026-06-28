@@ -1,6 +1,7 @@
 mod attachment;
 mod author;
 mod item;
+mod content;
 mod errors;
 
 use crate::{
