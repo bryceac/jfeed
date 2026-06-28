@@ -16,8 +16,19 @@ pub struct Attachment {
     mime_type: String,
     #[serde(default = "String::default", skip_serializing_if = "String::is_empty")]
     title: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "size_in_bytes", skip_serializing_if = "Option::is_none")]
     size: Option<u32>,
     #[serde(skip_serializing_if = "Option::is_none")]
     duration: Option<u32>
+}
+
+/**
+ * A convenience building type, to make it easy to create an attacment.
+ */
+pub struct AttachmentBuilder {
+    url: Option<String>,
+    mime_type: Option<String>,
+    title: Option<String>,
+    size: Option<u32>,
+    duration: Option<u32>,
 }
