@@ -1,7 +1,10 @@
 mod attachment;
 mod errors;
 
-use crate::errors::AttachmentBuildError as AttachmentBuildError;
+use crate::{
+    attachment::Attachment as Attachment, 
+    errors::AttachmentBuildError as AttachmentBuildError 
+};
 
 #[cfg(test)]
 mod tests {
@@ -11,5 +14,14 @@ mod tests {
     #[test]
     fn attachment_build_error_displays_correctly() {
         assert_eq!(format!("{}", AttachmentBuildError::URLNotFound), "URL must be specified.");
+    }
+
+    #[test]
+    fn attachment_build_fails_when_url_is_missing() {
+        let mut attachment = Attachment::builder();
+        attachment.set_mimetype("video/mp4");
+        attachment.set_title("Hello, World!");
+
+        assert!(attachment.build().is_err())
     }
 }
