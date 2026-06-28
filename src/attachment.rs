@@ -1,5 +1,9 @@
+use std::error::Error;
+
 use serde::{ Serialize, Deserialize };
 use url::Url;
+
+use crate::AttachmentBuildError;
 
 /**
  * JSON Feed attachment, 
@@ -59,5 +63,26 @@ impl AttachmentBuilder {
     pub fn set_duration(&mut self, duration_in_seconds: u32) -> &mut Self {
         self.duration = Some(duration_in_seconds);
         self
+    }
+
+    pub fn build(&self) -> Resut<Attachment, Error> {
+        match (self.url, self.mime_type) {
+            (None, Some(_)) => Err(AttachmentBuildError::URLNotFound),
+            (Some(_), None) => Err(AttachmentBuildError::MimeTypeNotFound),
+            (None, None) => Err(AttachmentBuildError::URLAndMimetypeNotFound),
+            (Some(url), Some(mime_type)) => if let Ok(parsed_url) = Url::parse(&url) {
+                Ok(Attachment {
+                    url: parsed_url,
+                    mime_type,
+                    title: if let Some(title) = self.title {
+                        title
+                    } else {
+                        String::default()
+                    },
+                    size: self.size,
+                    duration: self.duration
+                })
+            }
+        }
     }
 }
