@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use chrono::prelude::*;
 use serde::{ Serialize, Deserialize };
 use url::Url;
-use crate::{Author, ContentBuildError};
+use crate::{ Author, Content };
 
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
