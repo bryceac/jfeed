@@ -67,4 +67,7 @@ mod tests {
     }
 
     #[test]
+    fn author_building_fails_with_no_data() {
+        assert!(Author::builder().build().is_err())
+    }
 }
