@@ -1,6 +1,8 @@
 use serde::{ Deserialize, Serialize };
 use std::collections::HashMap;
 
+use crate::ContentBuildError;
+
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Content {
     #[serde(rename = "content_html", skip_serializing_if = "Option::is_none")]
@@ -36,11 +38,11 @@ impl ContentBuilder {
 struct ContentDes(HashMap<String, String>);
 
 impl TryFrom<ContentDes> for Content {
-    type Error = &'static str;
+    type Error = ContentBuildError;
 
-    fn try_from(mut value: AuthorDes) -> Result<Self, Self::Error> {
+    fn try_from(mut value: ContentDes) -> Result<Self, Self::Error> {
         if value.0.is_empty() {
-            return Err("Content cannot be left empty");
+            return Err(ContentBuildError::MissingContent);
         }
 
         match value.0.keys {
