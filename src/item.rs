@@ -1,3 +1,4 @@
+use chrono::DateTime;
 use serde::{ Serialize, Deserialize };
 use url::Url;
 
@@ -12,4 +13,9 @@ pub struct Item {
     summary: Option<String>,
     image: Option<Url>,
     banner: Option<Url>,
+    published: Option<DateTime<Local>>,
+    modified: Option<DateTime<Local>>,
+    authors: Vec<String>,
+    tags: Vec<String>,
+    language: Option<String>
 }
