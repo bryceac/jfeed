@@ -51,4 +51,14 @@ mod tests {
 
         assert!(attachment.build().is_err())
     }
+
+    #[test]
+    fn attachment_builds_successfully() {
+        let mut attachment = Attachment::builder();
+        attachment.set_url("https://example.co/hello.mp4");
+        attachment.set_mimetype("video/mp4");
+        attachment.set_title("Hello, World!");
+
+        assert!(attachment.build().is_ok())
+    }
 }
