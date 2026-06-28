@@ -24,7 +24,7 @@ impl Author {
 
 #[derive(Deserialize)]
 #[serde(transparent)]
-pub struct AuthorDes(HashMap<String, String>);
+struct AuthorDes(HashMap<String, String>);
 
 impl TryFrom<AuthorDes> for Author {
     type Error = AuthorBuildError;
