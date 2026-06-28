@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use serde::{ Serialize, Deserialize };
 use url::Url;
 
@@ -10,3 +12,7 @@ pub struct Author {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub avatar: Option<Url>
 }
+
+#[derive(Deserialize)]
+#[serde(transparent)]
+pub struct AuthorDes(HashMap<String, Option<String>>);
