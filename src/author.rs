@@ -69,7 +69,14 @@ impl AuthorBuilder {
                     })
                 }
             },
-            (Some(name), Some(url), None) => todo!(),
+            (Some(name), Some(url), None) => match Url::parse(&url) {
+                Ok(author_url) => Ok(Author {
+                    name: Some(name),
+                    url: Some(author_url),
+                    avatar: None
+                }),
+                Err(parse_error) => Err(AuthorBuildError::URLParseError(parse_error))
+            },
             (Some(name), None, Some(avatar)) => todo!(),
             (None, Some(url), Some(avatar)) => todo!(),
             (Some(name), None, None) => todo!(),
