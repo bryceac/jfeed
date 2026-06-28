@@ -14,7 +14,7 @@ use crate::AttachmentBuildError;
  * https://www.jsonfeed.org/version/1.1/index.html#attachments
  */
 
-#[derive(Serialize, Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Attachment {
     /// The attachment's URL
     pub url: Url,
