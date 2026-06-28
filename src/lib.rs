@@ -6,7 +6,8 @@ mod errors;
 use crate::{
     attachment::Attachment as Attachment, 
     errors::AttachmentBuildError as AttachmentBuildError,
-    errors::AuthorBuildError as AuthorBuildError 
+    errors::AuthorBuildError as AuthorBuildError,
+    author::Author as Author 
 };
 
 #[cfg(test)]
@@ -64,4 +65,6 @@ mod tests {
 
         assert!(attachment.build().is_ok())
     }
+
+    #[test]
 }
