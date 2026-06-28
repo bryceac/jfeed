@@ -31,6 +31,12 @@ pub struct Attachment {
     pub duration: Option<u32>
 }
 
+impl Attachment {
+    pub fn builder() -> AttachmentBuilder {
+        AttachmentBuilder::default()
+    }
+}
+
 /**
  * A convenience building type, to make it easy to create an attacment.
  */
