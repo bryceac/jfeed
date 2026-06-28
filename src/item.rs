@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 use chrono::prelude::*;
 use serde::{ Serialize, Deserialize };
 use url::Url;
