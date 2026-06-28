@@ -41,4 +41,14 @@ mod tests {
 
         assert!(attachment.build().is_err())
     }
+
+    #[test]
+    fn attachment_build_fails_when_url_cannot_be_parsed() {
+        let mut attachment = Attachment::builder();
+        attachment.set_url("mp4");
+        attachment.set_mimetype("video/mp4");
+        attachment.set_title("Hello, World!");
+
+        assert!(attachment.build().is_err())
+    }
 }
