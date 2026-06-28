@@ -1,4 +1,5 @@
 mod attachment;
+mod author;
 mod item;
 mod errors;
 
