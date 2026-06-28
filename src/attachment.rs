@@ -16,14 +16,19 @@ use crate::AttachmentBuildError;
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Attachment {
-    url: Url,
-    mime_type: String,
+    /// The attachment's URL
+    pub url: Url,
+    /// The mimetype for the attached item
+    pub mime_type: String,
+    /// Title title for the attached item
     #[serde(default = "String::default", skip_serializing_if = "String::is_empty")]
-    title: String,
+    pub title: String,
+    /// the size of the attachment in bytes
     #[serde(rename = "size_in_bytes", skip_serializing_if = "Option::is_none")]
-    size: Option<u32>,
+    pub size: Option<u32>,
+    /// the duration of the attached item in seconds
     #[serde(rename = "duration_in_seconds", skip_serializing_if = "Option::is_none")]
-    duration: Option<u32>
+    pub duration: Option<u32>
 }
 
 /**
