@@ -18,17 +18,46 @@ pub struct Attachment {
     title: String,
     #[serde(rename = "size_in_bytes", skip_serializing_if = "Option::is_none")]
     size: Option<u32>,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "duration_in_seconds", skip_serializing_if = "Option::is_none")]
     duration: Option<u32>
 }
 
 /**
  * A convenience building type, to make it easy to create an attacment.
  */
+
+#[derive(Default)]
 pub struct AttachmentBuilder {
     url: Option<String>,
     mime_type: Option<String>,
     title: Option<String>,
     size: Option<u32>,
     duration: Option<u32>,
+}
+
+impl AttachmentBuilder {
+    pub fn set_url(&mut self, url: &str) -> &mut Self {
+        self.url = Some(url.to_owned());
+        self
+    }
+
+    pub fn set_mimetype(&mut self, mimetype: &str) -> &mut Self {
+        self.mime_type = Some(mimetype.to_owned());
+        self
+    }
+
+    pub fn set_title(&mut self, title: &str) -> &mut Self {
+        self.title = Some(title.to_owned());
+        self
+    }
+
+    pub fn set_size(&mut self, size_in_bytes: u32) -> &mut Self {
+        self.size = Some(size_in_bytes);
+        self
+    }
+
+    pub fn set_duration(&mut self, duration_in_seconds: u32) -> &mut Self {
+        self.duration = Some(duration_in_seconds);
+        self
+    }
 }
