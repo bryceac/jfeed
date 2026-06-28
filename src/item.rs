@@ -41,7 +41,7 @@ pub struct Content {
 }
 
 impl Content {
-    pub fn is_empty(&self) -> bool {
+    pub fn is_empty(content: &Self) -> bool {
         self.html.is_none() && self.text.is_none()
     }
 }
