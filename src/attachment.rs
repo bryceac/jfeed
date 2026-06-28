@@ -1,4 +1,5 @@
 use serde::{ Serialize, Deserialize };
+use url::Url;
 
 /**
  * JSON Feed attachment, 
@@ -8,4 +9,15 @@ use serde::{ Serialize, Deserialize };
  * 
  * https://www.jsonfeed.org/version/1.1/index.html#attachments
  */
-pub struct Attachment
+
+#[derive(Serialize, Deserialize, Clone)]
+pub struct Attachment {
+    url: Url,
+    mime_type: String,
+    #[serde(default = "String::default", skip_serializing_if = "String::is_empty")]
+    title: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    size: Option<u32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    duration: Option<u32>
+}
