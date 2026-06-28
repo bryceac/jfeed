@@ -9,7 +9,8 @@ use crate::{
     errors::AttachmentBuildError as AttachmentBuildError,
     errors::AuthorBuildError as AuthorBuildError,
     errors::ContentBuildError as ContentBuildError,
-    author::Author as Author 
+    author::Author as Author,
+    content::Content as Content 
 };
 
 #[cfg(test)]
