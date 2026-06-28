@@ -5,7 +5,8 @@ mod errors;
 
 use crate::{
     attachment::Attachment as Attachment, 
-    errors::AttachmentBuildError as AttachmentBuildError 
+    errors::AttachmentBuildError as AttachmentBuildError,
+    errors::AuthorBuildError as AuthorBuildError 
 };
 
 #[cfg(test)]

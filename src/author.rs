@@ -3,6 +3,8 @@ use std::collections::HashMap;
 use serde::{ Serialize, Deserialize };
 use url::Url;
 
+use crate::AuthorBuildError;
+
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Author {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -49,5 +51,30 @@ impl AuthorBuilder {
     pub fn set_avatar(&mut self, avatar: &str) -> &mut Self {
         self.avatar = Some(avatar.to_owned());
         self
+    }
+
+    pub fn build(&self) -> Result<Author, AuthorBuildError> {
+        match (self.name.clone(), self.url.clone(), self.avatar.clone()) {
+            (None, None, None) => Err(AuthorBuildError::MissingData),
+            (Some(name), Some(url), Some(avatar)) => {
+                if let Err(parse_error) = Url::parse(&url) {
+                    Err(AuthorBuildError::URLParseError(parse_error))
+                } else if let Err(parse_error) = Url::parse(&avatar) {
+                    Err(AuthorBuildError::URLParseError(parse_error))
+                } else {
+                    Ok(Author {
+                        name: Some(name),
+                        url: Some(Url::parse(&url).unwrap()),
+                        avatar: Some(Url::parse(&avatar).unwrap()),
+                    })
+                }
+            },
+            (Some(name), Some(url), None) => todo!(),
+            (Some(name), None, Some(avatar)) => todo!(),
+            (None, Some(url), Some(avatar)) => todo!(),
+            (Some(name), None, None) => todo!(),
+            (None, Some(url), None) => todo!(),
+            (None, None, Some(avatar)) => todo!()
+        }
     }
 }
