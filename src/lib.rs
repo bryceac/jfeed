@@ -70,4 +70,14 @@ mod tests {
     fn author_building_fails_with_no_data() {
         assert!(Author::builder().build().is_err())
     }
+
+    #[test]
+    fn author_building_fails_with_invalid_url() {
+        assert!(Author::builder().set_url("mp4").build().is_err())
+    }
+
+    #[test]
+    fn author_building_fails_with_invalid_avatar() {
+        assert!(Author::builder().set_avatar("mp4").build().is_err())
+    }
 }
