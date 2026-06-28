@@ -33,3 +33,15 @@ impl fmt::Display for AuthorBuildError {
         }
     }
 }
+
+pub enum ContentBuildError {
+    MissingContent
+}
+
+impl fmt::Display for ContentBuildError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::MissingContent => write!(f, "No data found. Please provide some content."),
+        }
+    }
+}
