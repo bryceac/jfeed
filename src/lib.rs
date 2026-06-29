@@ -194,4 +194,30 @@ mod tests {
         .set_text("Hello, World!")
         .build().is_ok())
     }
+
+    #[test]
+    fn dates_build_fails_without_dates() {
+        assert!(Dates::builder().build().is_err())
+    }
+
+    #[test]
+    fn dates_build_works_with_only_published() {
+        let date = "2026-06-28T08:08:00Z";
+        assert!(Dates::builder().set_published(date).build().is_ok())
+    }
+
+    #[test]
+    fn dates_build_works_with_only_modified() {
+        let date = "2026-06-28T08:08:00Z";
+        assert!(Dates::builder().set_modified(date).build().is_ok())
+    }
+
+    #[test]
+    fn dates_build_works_with_both_dates() {
+        let published = "2026-06-28T08:08:00Z";
+        let modified = "2026-06-28T08:44:00Z";
+        assert!(Dates::builder()
+        .set_published(published)
+        .set_modified(modified).build().is_ok())
+    }
 }
