@@ -61,7 +61,7 @@ struct ContentDes(HashMap<String, String>);
 impl TryFrom<ContentDes> for Content {
     type Error = ContentBuildError;
 
-    fn try_from(mut value: ContentDes) -> Result<Self, Self::Error> {
+    fn try_from(&mut value: ContentDes) -> Result<Self, Self::Error> {
         if value.0.is_empty() {
             return Err(ContentBuildError::MissingContent);
         }

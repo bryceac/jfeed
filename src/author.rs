@@ -29,7 +29,7 @@ struct AuthorDes(HashMap<String, String>);
 impl TryFrom<AuthorDes> for Author {
     type Error = AuthorBuildError;
 
-    fn try_from(mut value: AuthorDes) -> Result<Self, Self::Error> {
+    fn try_from(&mut value: AuthorDes) -> Result<Self, Self::Error> {
         if value.0.is_empty() {
             return Err(AuthorBuildError::MissingData)
         }
