@@ -4,6 +4,7 @@ use std::collections::HashMap;
 use crate::ContentBuildError;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(try_from = "ContentDes")]
 pub struct Content {
     #[serde(rename = "content_html", skip_serializing_if = "Option::is_none")]
     pub html: Option<String>,
@@ -66,5 +67,19 @@ impl TryFrom<ContentDes> for Content {
         }
 
         let mut builder = ContentBuilder::default();
+
+        for key in value.0.keys() {
+            match key {
+                s if s == "content_html" => if let Some(html) = value.0.get(key) {
+                    builder.set_html(html);
+                },
+                s if s == "content_text" => if let Some(text) = value.0.get(key) {
+                    builder.set_text(text);
+                }
+                _ => {}
+            }
+        }
+
+        builder.build()
     }
 }
