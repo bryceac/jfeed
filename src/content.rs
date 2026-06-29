@@ -11,6 +11,12 @@ pub struct Content {
     pub text: Option<String>
 }
 
+impl Content {
+    pub fn builder() -> ContentBuilder {
+        ContentBuilder::default()
+    }
+}
+
 #[derive(Default)]
 pub struct ContentBuilder {
     html: Option<String>,
@@ -29,7 +35,21 @@ impl ContentBuilder {
     }
 
     pub fn build(&self) -> Result<Content, ContentBuildError> {
-        Content { html: (), text: () }
+        match (self.html.clone(), self.text.clone()) {
+            (Some(html), Some(text)) => Ok(Content {
+                html: Some(html),
+                text: Some(text)
+            }),
+            (None, Some(text)) => Ok(Content {
+                html: None,
+                text: Some(text)
+            }),
+            (Some(html), None) => Ok(Content {
+                html: Some(html),
+                text: None
+            }),
+            (None, None) => Err(ContentBuildError::MissingContent)
+        }
     }
 }
 
@@ -45,8 +65,6 @@ impl TryFrom<ContentDes> for Content {
             return Err(ContentBuildError::MissingContent);
         }
 
-        match value.0.keys {
-
-        }
+        let mut builder = ContentBuilder::default();
     }
 }
