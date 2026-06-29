@@ -11,7 +11,8 @@ use crate::{
     errors::AuthorBuildError as AuthorBuildError,
     errors::ContentBuildError as ContentBuildError,
     author::Author as Author,
-    content::Content as Content 
+    content::Content as Content,
+    dates::Dates as Dates 
 };
 
 #[cfg(test)]
