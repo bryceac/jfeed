@@ -1,6 +1,6 @@
-use serde::{ Serialize, Deserialize };
+use serde::{ Serialize, Deserialize, de::Error };
 use url::Url;
-use crate::{ Author, Content, Dates, Attachment };
+use crate::{ Author, Content, Dates, Attachment, errors::ItemBuildError };
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Item {
@@ -111,5 +111,9 @@ impl ItemBuilder {
     pub fn add_attachment(&mut self, attachment: &Attachment) -> &mut Self {
         self.attachments.push(attachment.to_owned());
         self
+    }
+
+    pub fn build(&self) -> Result<Self, ItemBuildError<Error> {
+        
     }
 }
