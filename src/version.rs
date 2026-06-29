@@ -1,6 +1,6 @@
 use std::str::FromStr;
 
-use serde::{ Serialize, Serializer, Deserialize, de::{ self, Visitor } };
+use serde::{ Serialize, Deserialize, de::{ self, Visitor } };
 
 #[derive(Clone, Debug)]
 pub enum Version {
