@@ -22,6 +22,7 @@ use crate::{
 mod tests {
     use super::*;
     use pretty_assertions::assert_eq;
+    use url::ParseError as URLParseError;
 
     #[test]
     fn attachment_build_error_displays_correctly() {
@@ -371,7 +372,7 @@ mod tests {
         builder.add_author(&author);
         builder.set_content(&content);
 
-        assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::NoContent))
+        assert!(builder.build().is_err())
     }
 
     fn item_build_fails_with_invalid_external_url() {
@@ -388,14 +389,15 @@ mod tests {
         .build().unwrap();
 
         let mut builder = Item::builder();
-        builder.set_id("hello_world.html");
-        builder.set_url("hello_world.html");
+        builder.set_id("https://example.com/hello_world.html");
+        builder.set_url("https://example.com/hello_world.html");
+        builder.set_external_url("image.png");
         builder.set_title("Hello, World!");
         builder.set_dates(&dates);
         builder.add_author(&author);
         builder.set_content(&content);
 
-        assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::NoContent))
+        assert!(builder.build().is_err())
     }
 
     fn item_build_fails_with_invalid_image_url() {
@@ -412,14 +414,15 @@ mod tests {
         .build().unwrap();
 
         let mut builder = Item::builder();
-        builder.set_id("hello_world.html");
-        builder.set_url("hello_world.html");
+        builder.set_id("https://example.com/hello_world.html");
+        builder.set_url("https://example.com/hello_world.html");
         builder.set_title("Hello, World!");
         builder.set_dates(&dates);
         builder.add_author(&author);
+        builder.set_image("image.png");
         builder.set_content(&content);
 
-        assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::NoContent))
+        assert!(builder.build().is_err())
     }
 
     fn item_build_fails_with_invalid_banner_url() {
@@ -436,13 +439,22 @@ mod tests {
         .build().unwrap();
 
         let mut builder = Item::builder();
-        builder.set_id("hello_world.html");
-        builder.set_url("hello_world.html");
+        builder.set_id("https://example.com/hello_world.html");
+        builder.set_url("https://example.com/hello_world.html");
         builder.set_title("Hello, World!");
+        builder.set_banner("image.png");
         builder.set_dates(&dates);
         builder.add_author(&author);
         builder.set_content(&content);
 
-        assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::NoContent))
+        assert!(builder.build().is_err())
+    }
+
+    #[test]
+    fn item_build_fails_with_any_invalid_urls() {
+        item_build_fails_with_invalid_main_url();
+        item_build_fails_with_invalid_external_url();
+        item_build_fails_with_invalid_banner_url();
+        item_build_fails_with_invalid_image_url();
     }
 }
