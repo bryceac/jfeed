@@ -53,3 +53,18 @@ impl fmt::Display for ContentBuildError {
 }
 
 impl Error for ContentBuildError {}
+
+#[derive(Debug)]
+pub enum DatesBuildError {
+    MissingContent
+}
+
+impl fmt::Display for DatesBuildError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::MissingContent => write!(f, "No data found. Please provide some content."),
+        }
+    }
+}
+
+impl Error for DatesBuildError {}
