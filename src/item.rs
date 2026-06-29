@@ -46,3 +46,55 @@ pub struct ItemBuilder {
     language: Option<String>,
     attachments: Vec<Attachment>
 }
+
+impl ItemBuilder {
+    pub fn set_id(&mut self, id: &str) -> &mut Self {
+        self.id = Some(id.to_owned());
+        self
+    }
+
+    pub fn set_url(&mut self, url: &str) -> &mut Self {
+        self.url = Some(url.to_owned());
+        self
+    }
+
+    pub fn set_external_url(&mut self, url: &str) -> &mut Self {
+        self.external_url = Some(url.to_owned());
+        self
+    }
+
+    pub fn set_title(&mut self, title: &str) -> &mut Self {
+        self.title = Some(title.to_owned());
+        self
+    }
+
+    pub fn set_content(&mut self, content: &Content) -> &mut Self {
+        self.content = Some(content.clone());
+        self
+    }
+
+    pub fn set_summary(&mut self, summary: &str) -> &mut Self {
+        self.summary = Some(summary.to_owned());
+        self
+    }
+
+    pub fn set_image(&mut self, image: &str) -> &mut Self {
+        self.image = Some(image.to_owned());
+        self
+    }
+
+    pub fn set_banner(&mut self, banner: &str) -> &mut Self {
+        self.banner = Some(banner.to_owned());
+        self
+    }
+
+    pub fn set_dates(&mut self, dates: &Dates) -> &mut Self {
+        self.dates = Some(dates.clone());
+        self
+    }
+
+    pub fn set_language(&mut self, lang: &str) -> &mut Self {
+        self.language = Some(lang.to_owned());
+        self
+    }
+}
