@@ -76,6 +76,7 @@ impl Error for DatesBuildError {}
 pub enum ItemBuildError<T: Error> {
     IDNotFound,
     URLNotFound,
+    NoAuthorsFound,
     MiscError(T)
 }
 
@@ -84,6 +85,7 @@ impl<T: Error> fmt::Display for ItemBuildError<T> {
         match self {
             Self::IDNotFound => write!(f, "Please provide an identifier."),
             Self::URLNotFound => write!(f, "Please provide a URL"),
+            Self::NoAuthorsFound => write!(f, "Item must have at least one author."),
             Self::MiscError(error) => write!(f, "{}", error)
         }
     }
