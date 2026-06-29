@@ -56,7 +56,8 @@ impl Error for ContentBuildError {}
 
 #[derive(Debug)]
 pub enum DatesBuildError {
-    MissingContent
+    wrongFormat(),
+    noDates,
 }
 
 impl fmt::Display for DatesBuildError {
