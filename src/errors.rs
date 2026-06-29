@@ -20,6 +20,9 @@ impl fmt::Display for AttachmentBuildError {
     }
 }
 
+impl Error for AttachmentBuildError {}
+
+#[derive(Debug)]
 pub enum AuthorBuildError {
     MissingData,
     URLParseError(ParseError)
@@ -34,6 +37,9 @@ impl fmt::Display for AuthorBuildError {
     }
 }
 
+impl Error for AuthorBuildError {}
+
+#[derive(Debug)]
 pub enum ContentBuildError {
     MissingContent
 }
@@ -45,3 +51,5 @@ impl fmt::Display for ContentBuildError {
         }
     }
 }
+
+impl Error for ContentBuildError {}
