@@ -29,3 +29,20 @@ pub struct Item {
     #[serde(skip_serializing_if = "Vec::is_empty")]
     attachments: Vec<Attachment>
 }
+
+#[derive(Default)]
+pub struct ItemBuilder {
+    id: Option<String>,
+    url: Option<Url>,
+    external_url: Option<Url>,
+    title: Option<String>,
+    content: Option<Content>,
+    summary: Option<String>,
+    image: Option<Url>,
+    banner: Option<Url>,
+    dates: Option<Dates>,
+    authors: Vec<Author>,
+    tags: Vec<String>,
+    language: Option<String>,
+    attachments: Vec<Attachment>
+}
