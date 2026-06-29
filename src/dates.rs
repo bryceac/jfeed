@@ -29,10 +29,20 @@ impl DatesBuilder {
     }
 
     pub fn build(&self) -> Result<Dates, DatesBuildError> {
-        match (self.published, self.modified) {
+        match (self.published.clone(), self.modified.clone()) {
             (Some(published), Some(modified)) => if let Err(error) = DateTime::parse_from_rfc3339(&published) {
-
-            }
+                Err(DatesBuildError::DateParseError(error))
+            } else if let Err(error) = DateTime::parse_from_rfc3339(&modified) {
+                Err(DatesBuildError::DateParseError(error))
+            } else {
+                Ok(Dates {
+                    published: Some(DateTime::parse_from_rfc3339(&published).unwrap().into()),
+                    modified: Some(DateTime::parse_from_rfc3339(&modified).unwrap().into())
+                })
+            },
+            (Some(publish), None) => todo!(),
+            (None, Some(modified)) => todo!(),
+            (None, None) => Err(DatesBuildError::noDates)
         }
     }
 }
