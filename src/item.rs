@@ -1,6 +1,6 @@
 use serde::{ Serialize, Deserialize };
 use url::Url;
-use crate::{ Author, Content };
+use crate::{ Author, Content, Dates };
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Item {
@@ -18,6 +18,7 @@ pub struct Item {
     image: Option<Url>,
     #[serde(skip_serializing_if = "Option::is_none")]
     banner: Option<Url>,
+    dates: Dates,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     authors: Vec<Author>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
