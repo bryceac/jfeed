@@ -30,6 +30,12 @@ pub struct Item {
     attachments: Vec<Attachment>
 }
 
+impl Item {
+    pub fn builder() -> ItemBuilder {
+        ItemBuilder::default()
+    }
+}
+
 #[derive(Default)]
 pub struct ItemBuilder {
     id: Option<String>,
