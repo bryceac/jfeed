@@ -57,7 +57,7 @@ impl Error for ContentBuildError {}
 
 #[derive(Debug)]
 pub enum DatesBuildError {
-    wrongFormat(ChronoParseError),
+    DateParseError(ChronoParseError),
     noDates,
 }
 
@@ -65,7 +65,7 @@ impl fmt::Display for DatesBuildError {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
         match self {
             Self::noDates => write!(f, "No data found. Please provide either a publication or modification date."),
-            Self::wrongFormat(input) => write!(f, "{} is not in proper format. Please use RFC 3339 format.", input)
+            Self::DateParseError(input) => write!(f, "{} is not in proper format. Please use RFC 3339 format.", input)
         }
     }
 }
