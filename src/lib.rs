@@ -6,7 +6,7 @@ mod dates;
 mod feed;
 mod errors;
 
-use crate::{
+pub use crate::{
     attachment::Attachment as Attachment, 
     errors::AttachmentBuildError as AttachmentBuildError,
     errors::AuthorBuildError as AuthorBuildError,
@@ -16,7 +16,9 @@ use crate::{
     author::Author as Author,
     content::Content as Content,
     dates::Dates as Dates,
-    item::Item as Item 
+    item::Item as Item,
+    feed::Feed as Feed,
+    feed::Version as FeedVersion
 };
 
 #[cfg(test)]
