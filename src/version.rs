@@ -1,7 +1,6 @@
 use std::str::FromStr;
 
 use serde::{ Serialize, Deserialize };
-use url::Url;
 
 #[derive(Clone, Debug)]
 pub enum Version {
