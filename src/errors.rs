@@ -58,13 +58,13 @@ impl Error for ContentBuildError {}
 #[derive(Debug)]
 pub enum DatesBuildError {
     DateParseError(ChronoParseError),
-    noDates,
+    NoDates,
 }
 
 impl fmt::Display for DatesBuildError {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
         match self {
-            Self::noDates => write!(f, "No data found. Please provide either a publication or modification date."),
+            Self::NoDates => write!(f, "No data found. Please provide either a publication or modification date."),
             Self::DateParseError(parse_error) => write!(f, "{}", parse_error)
         }
     }

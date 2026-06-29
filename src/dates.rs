@@ -40,9 +40,21 @@ impl DatesBuilder {
                     modified: Some(DateTime::parse_from_rfc3339(&modified).unwrap().into())
                 })
             },
-            (Some(publish), None) => todo!(),
-            (None, Some(modified)) => todo!(),
-            (None, None) => Err(DatesBuildError::noDates)
+            (Some(published), None) => match DateTime::parse_from_rfc3339(&published) {
+                Ok(date_published) => Ok(Dates { 
+                    published: Some(date_published.into()), 
+                    modified: None 
+                }),
+                Err(error) => Err(DatesBuildError::DateParseError(error))
+            },
+            (None, Some(modified)) => match DateTime::parse_from_rfc3339(&modified) {
+                Ok(date_modified) => Ok(Dates { 
+                    published: Some(date_modified.into()), 
+                    modified: None 
+                }),
+                Err(error) => Err(DatesBuildError::DateParseError(error))
+            },
+            (None, None) => Err(DatesBuildError::NoDates)
         }
     }
 }
