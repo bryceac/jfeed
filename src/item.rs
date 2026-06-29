@@ -126,8 +126,19 @@ impl ItemBuilder {
             Err(ItemBuildError::NoAuthorsFound)
         }
 
-        match Url::parse(self.url) {
-            Ok(parsed_url) => {},
+        match Url::parse(&self.url) {
+            Ok(parsed_url) => {
+                if let Some(external_url) = self.external_url {
+                    if let Err(parse_error) = Url::parse(&external_url) {
+                        Err(parse_error)
+                    }
+                }
+
+                Ok(Item {
+                    id: self.id.clone().unwrap(),
+                    url: parsed_url
+                })
+            },
             Err(parse_error) => Err(parse_error)
         }
     }
