@@ -29,6 +29,10 @@ impl DatesBuilder {
     }
 
     pub fn build(&self) -> Result<Dates, DatesBuildError> {
+        match (self.published, self.modified) {
+            (Some(published), Some(modified)) => if let Err(error) = DateTime::parse_from_rfc3339(&published) {
 
+            }
+        }
     }
 }

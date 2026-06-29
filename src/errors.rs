@@ -1,12 +1,13 @@
 use std::{ error::Error, fmt };
-use url::ParseError;
+use url::ParseError as URLParseError;
+use chrono::format::ParseError as ChronoParseError;
 
 #[derive(Debug)]
 pub enum AttachmentBuildError {
     URLNotFound,
     MimetypeNotFound,
     URLAndMimetypeNotFound,
-    URLParseError(ParseError)
+    URLParseError(URLParseError)
 }
 
 impl fmt::Display for AttachmentBuildError {
@@ -25,7 +26,7 @@ impl Error for AttachmentBuildError {}
 #[derive(Debug)]
 pub enum AuthorBuildError {
     MissingData,
-    URLParseError(ParseError)
+    URLParseError(URLParseError)
 }
 
 impl fmt::Display for AuthorBuildError {
@@ -56,7 +57,7 @@ impl Error for ContentBuildError {}
 
 #[derive(Debug)]
 pub enum DatesBuildError {
-    wrongFormat(String),
+    wrongFormat(ChronoParseError),
     noDates,
 }
 
