@@ -1,6 +1,6 @@
 use serde::{ Serialize, Deserialize, de::Error };
 use url::Url;
-use crate::{ Author, Content, Dates, Attachment, errors::ItemBuildError };
+use crate::{ Author, Content, Dates, Attachment, ItemBuildError };
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Item {
@@ -114,6 +114,21 @@ impl ItemBuilder {
     }
 
     pub fn build(&self) -> Result<Self, ItemBuildError<Error> {
-        
+        if self.id.is_none() {
+            Err(ItemBuildError::IDNotFound)
+        }
+
+        if self.url.is_none() {
+            Err(ItemBuildError::URLNotFound)
+        }
+
+        if self.authors.is_empty() {
+            Err(ItemBuildError::NoAuthorsFound)
+        }
+
+        match Url::parse(self.url) {
+            Ok(parsed_url) => {},
+            Err(parse_error) => Err(parse_error)
+        }
     }
 }
