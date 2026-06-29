@@ -4,6 +4,7 @@ mod item;
 mod content;
 mod dates;
 mod feed;
+mod version;
 mod errors;
 
 pub use crate::{
@@ -18,7 +19,7 @@ pub use crate::{
     dates::Dates as Dates,
     item::Item as Item,
     feed::Feed as Feed,
-    feed::Version as FeedVersion
+    version::Version as FeedVersion
 };
 
 #[cfg(test)]
