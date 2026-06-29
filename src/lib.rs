@@ -3,6 +3,7 @@ mod author;
 mod item;
 mod content;
 mod dates;
+mod hub;
 mod feed;
 mod version;
 mod errors;
