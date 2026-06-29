@@ -1,5 +1,3 @@
-use std::error::Error;
-
 use serde::{ Serialize, Deserialize };
 use url::Url;
 
