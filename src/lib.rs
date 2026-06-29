@@ -277,4 +277,27 @@ mod tests {
         assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::URLNotFound))
     }
 
+    #[test]
+    fn item_build_fails_without_author() {
+        let dates = Dates::builder()
+        .set_published("2026-06-28T08:55:00Z")
+        .build().unwrap();
+
+        /* let author = Author::builder()
+        .set_name("Jerry")
+        .build().unwrap(); */
+
+        let content = Content::builder()
+        .set_text("Hello, World!")
+        .build().unwrap();
+
+        let mut builder = Item::builder();
+        builder.set_id("https://example.com/hello_world.html");
+        builder.set_url("https://example.com/hello_world.html");
+        builder.set_title("Hello, World!");
+        builder.set_dates(&dates);
+        builder.set_content(&content);
+
+        assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::NoAuthorsFound))
+    }
 }
