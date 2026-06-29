@@ -97,4 +97,19 @@ impl ItemBuilder {
         self.language = Some(lang.to_owned());
         self
     }
+
+    pub fn add_tag(&mut self, tag: &str) -> &mut Self {
+        self.tags.push(tag.to_owned());
+        self
+    }
+
+    pub fn add_author(&mut self, author: &Author) -> &mut Self {
+        self.authors.push(author.to_owned());
+        self
+    }
+
+    pub fn add_attachment(&mut self, attachment: &Attachment) -> &mut Self {
+        self.attachments.push(attachment.to_owned());
+        self
+    }
 }
