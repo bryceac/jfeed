@@ -171,4 +171,27 @@ mod tests {
 
     assert!(builder.build().is_ok())
     }
+
+    #[test]
+    fn content_building_fails_with_no_content() {
+        assert!(Content::builder().build().is_err())
+    }
+
+    #[test]
+    fn content_building_works_with_only_html() {
+        assert!(Content::builder().set_html("<p>Hello, World</p>").build().is_ok())
+    }
+
+    #[test]
+    fn content_building_works_with_only_text() {
+        assert!(Content::builder().set_text("Hello, World!").build().is_ok())
+    }
+
+    #[test]
+    fn can_build_content_with_both_plain_and_html() {
+        assert!(Content::builder()
+        .set_html("<p>Hello, World!</p>")
+        .set_text("Hello, World!")
+        .build().is_ok())
+    }
 }
