@@ -73,22 +73,22 @@ impl fmt::Display for DatesBuildError {
 impl Error for DatesBuildError {}
 
 #[derive(Debug)]
-pub enum ItemBuildError<T: Error> {
+pub enum ItemBuildError {
     IDNotFound,
     URLNotFound,
     NoAuthorsFound,
-    MiscError(T)
+    MiscError(URLParseError)
 }
 
-impl<T: Error> fmt::Display for ItemBuildError<T> {
+impl fmt::Display for ItemBuildError {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
         match self {
             Self::IDNotFound => write!(f, "Please provide an identifier."),
             Self::URLNotFound => write!(f, "Please provide a URL"),
             Self::NoAuthorsFound => write!(f, "Item must have at least one author."),
-            Self::MiscError(error) => write!(f, "{}", error)
+            Self::MiscError(parse_error) => write!(f, "{}", parse_error)
         }
     }
 }
 
-impl<T: Error> Error for ItemBuildError<T> {}
+impl Error for ItemBuildError {}
