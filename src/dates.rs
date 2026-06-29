@@ -6,6 +6,7 @@ use serde::{ Serialize, Deserialize };
 use crate::DatesBuildError;
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
+#[serde(try_from = "DatesDes")]
 pub struct Dates {
     #[serde(rename = "date_published", skip_serializing_if = "Option::is_none")]
     pub published: Option<DateTime<Utc>>,
