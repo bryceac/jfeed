@@ -1,16 +1,16 @@
 use std::collections::HashMap;
 
 use chrono::prelude::*;
-use serde::{ Serialize, Deserialize };
+use serde::{ Serialize, Deserialize, Serializer, ser::SerializeStruct };
 
 use crate::DatesBuildError;
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Deserialize, Clone, Debug)]
 #[serde(try_from = "DatesDes")]
 pub struct Dates {
-    #[serde(rename = "date_published", skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "date_published")]
     pub published: Option<DateTime<Utc>>,
-    #[serde(rename = "date_modified", skip_serializing_if = "Option::is_none")]
+    #[serde(rename = "date_modified")]
     pub modified: Option<DateTime<Utc>>,
 }
 
@@ -96,4 +96,21 @@ impl TryFrom<DatesDes> for Dates {
 
         builder.build()
     }
+}
+
+impl Serialize for Dates {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+        where S: Serializer {
+            let mut state = serializer.serialize_struct("Dates", 2)?;
+            
+            if let Some(date_published) = self.published {
+                state.serialize_field("date_published", &date_published.to_rfc3339())?;
+            }
+
+            if let Some(date_modified) = self.modified {
+                state.serialize_field("date_published", &date_modified.to_rfc3339())?;
+            }
+
+            state.end()
+        }
 }
