@@ -15,7 +15,7 @@ impl fmt::Display for AttachmentBuildError {
             Self::MimetypeNotFound => write!(f, "mimetype must be specified."),
             Self::URLNotFound => write!(f, "URL must be specified."),
             Self::URLAndMimetypeNotFound => write!(f, "Both URL and mimetype must be specified"),
-            Self::URLParseError(parseError) => write!(f, "{}", parseError)
+            Self::URLParseError(parse_error) => write!(f, "{}", parse_error)
         }
     }
 }
