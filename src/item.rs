@@ -3,7 +3,6 @@ use serde::{ Serialize, Deserialize };
 use url::Url;
 use crate::{ Author, Content };
 
-
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Item {
     id: String,
