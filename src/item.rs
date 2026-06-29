@@ -33,13 +33,13 @@ pub struct Item {
 #[derive(Default)]
 pub struct ItemBuilder {
     id: Option<String>,
-    url: Option<Url>,
-    external_url: Option<Url>,
+    url: Option<String>,
+    external_url: Option<String>,
     title: Option<String>,
     content: Option<Content>,
     summary: Option<String>,
-    image: Option<Url>,
-    banner: Option<Url>,
+    image: Option<String>,
+    banner: Option<String>,
     dates: Option<Dates>,
     authors: Vec<Author>,
     tags: Vec<String>,
