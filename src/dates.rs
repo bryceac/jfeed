@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use chrono::prelude::*;
 use serde::{ Serialize, Deserialize };
 
@@ -62,5 +64,35 @@ impl DatesBuilder {
             },
             (None, None) => Err(DatesBuildError::NoDates)
         }
+    }
+}
+
+#[derive(Deserialize)]
+#[serde(transparent)]
+struct DatesDes(HashMap<String, String>);
+
+impl TryFrom<DatesDes> for Dates {
+    type Error = DatesBuildError;
+
+    fn try_from(mut value: DatesDes) -> Result<Self, Self::Error> {
+        if value.0.is_empty() {
+            return Err(DatesBuildError::NoDates);
+        }
+
+        let mut builder = DatesBuilder::default();
+
+        for key in value.0.keys() {
+            match key {
+                s if s == "date_published" => if let Some(date_published) = value.0.get(key) {
+                    builder.set_published(&date_published);
+                },
+                s if s == "date_modified" => if let Some(date_modified) = value.0.get(key) {
+                    builder.set_modified(&date_modified);
+                },
+                _ => {}
+            }
+        }
+
+        builder.build()
     }
 }
