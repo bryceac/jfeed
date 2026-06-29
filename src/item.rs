@@ -161,7 +161,20 @@ impl ItemBuilder {
                     title: self.title,
                     content: self.content.unwrap(),
                     summary: self.summary,
-
+                    image: if let Some(image) = self.image {
+                        if let Ok(parsed_image_url) = Url::parse(&image) {
+                            Some(prsed_image_url)
+                        }
+                    } else {
+                        None
+                    },
+                    banner: if let Some(banner) = self.banner {
+                        if let Ok(parsed_banner_url) = Url::parse(&banner) {
+                            Some(prsed_banner_url)
+                        }
+                    } else {
+                        None
+                    }
                 })
             },
             Err(parse_error) => Err(parse_error)
