@@ -10,6 +10,7 @@ use crate::{
     errors::AttachmentBuildError as AttachmentBuildError,
     errors::AuthorBuildError as AuthorBuildError,
     errors::ContentBuildError as ContentBuildError,
+    errors::DatesBuildError as DatesBuildError,
     author::Author as Author,
     content::Content as Content,
     dates::Dates as Dates 
