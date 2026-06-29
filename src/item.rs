@@ -1,4 +1,4 @@
-use serde::{ Serialize, Deserialize, de::Error };
+use serde::{ Serialize, Deserialize };
 use url::Url;
 use crate::{ Author, Content, Dates, Attachment, ItemBuildError };
 
