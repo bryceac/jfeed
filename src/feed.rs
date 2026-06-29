@@ -3,7 +3,7 @@ use std::str::FromStr;
 use serde::{ Serialize, Deserialize };
 use url::Url;
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Clone, Debug)]
 pub enum Version {
     JSONFeed1_1
 }
@@ -23,6 +23,14 @@ impl FromStr for Version {
             "https://jsonfeed.org/version/1.1" => Ok(Self::JSONFeed1_1),
             _ => Err("invalid version.")
         }
+    }
+}
+
+impl Serialize for Version {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+        where
+            S: serde::Serializer {
+        
     }
 }
 
