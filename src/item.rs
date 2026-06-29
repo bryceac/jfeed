@@ -1,6 +1,6 @@
 use serde::{ Serialize, Deserialize };
 use url::Url;
-use crate::{ Author, Content, Dates };
+use crate::{ Author, Content, Dates, Attachment };
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Item {
@@ -25,5 +25,7 @@ pub struct Item {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     tags: Vec<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    language: Option<String>
+    language: Option<String>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    attachments: Vec<Attachment>
 }
