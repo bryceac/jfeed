@@ -22,7 +22,6 @@ use crate::{
 mod tests {
     use super::*;
     use pretty_assertions::assert_eq;
-    use url::ParseError as URLParseError;
 
     #[test]
     fn attachment_build_error_displays_correctly() {
