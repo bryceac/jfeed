@@ -11,6 +11,7 @@ use crate::{
     errors::AuthorBuildError as AuthorBuildError,
     errors::ContentBuildError as ContentBuildError,
     errors::DatesBuildError as DatesBuildError,
+    errors::ItemBuildError as ItemBuildError,
     author::Author as Author,
     content::Content as Content,
     dates::Dates as Dates 
