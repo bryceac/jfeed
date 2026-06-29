@@ -14,7 +14,8 @@ use crate::{
     errors::ItemBuildError as ItemBuildError,
     author::Author as Author,
     content::Content as Content,
-    dates::Dates as Dates 
+    dates::Dates as Dates,
+    item::Item as Item 
 };
 
 #[cfg(test)]
@@ -219,5 +220,10 @@ mod tests {
         assert!(Dates::builder()
         .set_published(published)
         .set_modified(modified).build().is_ok())
+    }
+
+    #[test]
+    fn item_build_fails_without_data() {
+        let item = Item
     }
 }
