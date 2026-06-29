@@ -300,4 +300,149 @@ mod tests {
 
         assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::NoAuthorsFound))
     }
+
+    #[test]
+    fn item_build_fails_without_dates() {
+       /* let dates = Dates::builder()
+        .set_published("2026-06-28T08:55:00Z")
+        .build().unwrap(); */
+
+        let author = Author::builder()
+        .set_name("Jerry")
+        .build().unwrap();
+
+        let content = Content::builder()
+        .set_text("Hello, World!")
+        .build().unwrap();
+
+        let mut builder = Item::builder();
+        builder.set_id("https://example.com/hello_world.html");
+        builder.set_url("https://example.com/hello_world.html");
+        builder.set_title("Hello, World!");
+        builder.add_author(&author);
+        builder.set_content(&content);
+
+        assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::NoDate))
+    }
+
+    #[test]
+    fn item_build_fails_without_content() {
+        let dates = Dates::builder()
+        .set_published("2026-06-28T08:55:00Z")
+        .build().unwrap();
+
+        let author = Author::builder()
+        .set_name("Jerry")
+        .build().unwrap();
+
+        /* let content = Content::builder()
+        .set_text("Hello, World!")
+        .build().unwrap(); */
+
+        let mut builder = Item::builder();
+        builder.set_id("https://example.com/hello_world.html");
+        builder.set_url("https://example.com/hello_world.html");
+        builder.set_title("Hello, World!");
+        builder.set_dates(&dates);
+        builder.add_author(&author);
+        // builder.set_content(&content);
+
+        assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::NoContent))
+    }
+
+    fn item_build_fails_with_invalid_main_url() {
+        let dates = Dates::builder()
+        .set_published("2026-06-28T08:55:00Z")
+        .build().unwrap();
+
+        let author = Author::builder()
+        .set_name("Jerry")
+        .build().unwrap();
+
+        let content = Content::builder()
+        .set_text("Hello, World!")
+        .build().unwrap();
+
+        let mut builder = Item::builder();
+        builder.set_id("hello_world.html");
+        builder.set_url("hello_world.html");
+        builder.set_title("Hello, World!");
+        builder.set_dates(&dates);
+        builder.add_author(&author);
+        builder.set_content(&content);
+
+        assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::NoContent))
+    }
+
+    fn item_build_fails_with_invalid_external_url() {
+        let dates = Dates::builder()
+        .set_published("2026-06-28T08:55:00Z")
+        .build().unwrap();
+
+        let author = Author::builder()
+        .set_name("Jerry")
+        .build().unwrap();
+
+        let content = Content::builder()
+        .set_text("Hello, World!")
+        .build().unwrap();
+
+        let mut builder = Item::builder();
+        builder.set_id("hello_world.html");
+        builder.set_url("hello_world.html");
+        builder.set_title("Hello, World!");
+        builder.set_dates(&dates);
+        builder.add_author(&author);
+        builder.set_content(&content);
+
+        assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::NoContent))
+    }
+
+    fn item_build_fails_with_invalid_image_url() {
+        let dates = Dates::builder()
+        .set_published("2026-06-28T08:55:00Z")
+        .build().unwrap();
+
+        let author = Author::builder()
+        .set_name("Jerry")
+        .build().unwrap();
+
+        let content = Content::builder()
+        .set_text("Hello, World!")
+        .build().unwrap();
+
+        let mut builder = Item::builder();
+        builder.set_id("hello_world.html");
+        builder.set_url("hello_world.html");
+        builder.set_title("Hello, World!");
+        builder.set_dates(&dates);
+        builder.add_author(&author);
+        builder.set_content(&content);
+
+        assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::NoContent))
+    }
+
+    fn item_build_fails_with_invalid_banner_url() {
+        let dates = Dates::builder()
+        .set_published("2026-06-28T08:55:00Z")
+        .build().unwrap();
+
+        let author = Author::builder()
+        .set_name("Jerry")
+        .build().unwrap();
+
+        let content = Content::builder()
+        .set_text("Hello, World!")
+        .build().unwrap();
+
+        let mut builder = Item::builder();
+        builder.set_id("hello_world.html");
+        builder.set_url("hello_world.html");
+        builder.set_title("Hello, World!");
+        builder.set_dates(&dates);
+        builder.add_author(&author);
+        builder.set_content(&content);
+
+        assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::NoContent))
+    }
 }
