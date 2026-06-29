@@ -126,6 +126,10 @@ impl ItemBuilder {
             Err(ItemBuildError::NoAuthorsFound)
         }
 
+        if self.content.is_none() {
+            Err(ItemBuildError::NoContent)
+        }
+
         match Url::parse(&self.url) {
             Ok(parsed_url) => {
                 if let Some(external_url) = self.external_url {
@@ -134,9 +138,30 @@ impl ItemBuilder {
                     }
                 }
 
+                if let Some(image) = self.image {
+                    if let Err(parse_error) = Url::parse(&image) {
+                        Err(parse_error)
+                    }
+                }
+
+                if let Some(banner) = self.banner {
+                    if let Err(parse_error) = Url::parse(&banner) {
+                        Err(parse_error)
+                    }
+                }
+
                 Ok(Item {
                     id: self.id.clone().unwrap(),
-                    url: parsed_url
+                    url: parsed_url.clone(),
+                    external_url: if let Some(external_url) = self.external_url {
+                        Url::parse(&external_url).unwrap()
+                    } else {
+                        None
+                    },
+                    title: self.title,
+                    content: self.content.unwrap(),
+                    summary: self.summary,
+
                 })
             },
             Err(parse_error) => Err(parse_error)

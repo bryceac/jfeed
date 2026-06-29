@@ -77,6 +77,7 @@ pub enum ItemBuildError {
     IDNotFound,
     URLNotFound,
     NoAuthorsFound,
+    NoContent,
     MiscError(URLParseError)
 }
 
@@ -86,6 +87,7 @@ impl fmt::Display for ItemBuildError {
             Self::IDNotFound => write!(f, "Please provide an identifier."),
             Self::URLNotFound => write!(f, "Please provide a URL"),
             Self::NoAuthorsFound => write!(f, "Item must have at least one author."),
+            Self::NoContent => write!(f, "Please provide content in plain text or HTML."),
             Self::MiscError(parse_error) => write!(f, "{}", parse_error)
         }
     }
