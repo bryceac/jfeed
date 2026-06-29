@@ -14,3 +14,19 @@ pub struct DatesBuilder {
     published: Option<String>,
     modified: Option<String>
 }
+
+impl DatesBuilder {
+    pub fn set_published(&mut self, published: &str) -> &mut Self {
+        self.published = Some(published.to_owned());
+        self
+    }
+
+    pub fn set_modified(&mut self, modified: &str) -> &mut Self {
+        self.modified = Some(modified.to_owned());
+        self
+    }
+
+    pub fn build(&self) -> Dates {
+        
+    }
+}
