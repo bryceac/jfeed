@@ -224,6 +224,32 @@ mod tests {
 
     #[test]
     fn item_build_fails_without_data() {
-        let item = Item
+        let builder = Item::builder();
+
+        assert!(builder.build().is_err())
+    }
+
+    #[test]
+    fn item_build_fails_without_id() {
+        let dates = Dates::builder()
+        .set_published("2026-06-28T08:55:00Z")
+        .build().unwrap();
+
+        let author = Author::builder()
+        .set_name("Jerry")
+        .build().unwrap();
+
+        let content = Content::builder()
+        .set_text("Hello, World!")
+        .build().unwrap();
+
+        let mut builder = Item::builder();
+        builder.set_url("https://example.com/hello_world.html");
+        builder.set_title("Hello, World!");
+        builder.set_dates(&dates);
+        builder.add_author(&author);
+        builder.set_content(&content);
+
+        assert_eq!(format!("{}", builder.build().err().unwrap()), format!("{}", ItemBuildError::IDNotFound))
     }
 }
