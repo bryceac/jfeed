@@ -1,6 +1,8 @@
 use chrono::prelude::*;
 use serde::{ Serialize, Deserialize };
 
+use crate::DatesBuildError;
+
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Dates {
     #[serde(rename = "date_published", skip_serializing_if = "Option::is_none")]
@@ -26,7 +28,7 @@ impl DatesBuilder {
         self
     }
 
-    pub fn build(&self) -> Dates {
-        
+    pub fn build(&self) -> Result<Dates, DatesBuildError> {
+
     }
 }
