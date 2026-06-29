@@ -11,6 +11,12 @@ pub struct Dates {
     pub modified: Option<DateTime<Utc>>,
 }
 
+impl Dates {
+    pub fn builder() -> DatesBuilder {
+        DatesBuilder::default()
+    }
+}
+
 #[derive(Default)]
 pub struct DatesBuilder {
     published: Option<String>,
