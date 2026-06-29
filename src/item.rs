@@ -113,71 +113,84 @@ impl ItemBuilder {
         self
     }
 
-    pub fn build(&self) -> Result<Self, ItemBuildError<Error> {
+    pub fn build(&self) -> Result<Item, ItemBuildError> {
         if self.id.is_none() {
-            Err(ItemBuildError::IDNotFound)
+            return Err(ItemBuildError::IDNotFound);
         }
 
         if self.url.is_none() {
-            Err(ItemBuildError::URLNotFound)
+            return Err(ItemBuildError::URLNotFound);
         }
 
         if self.authors.is_empty() {
-            Err(ItemBuildError::NoAuthorsFound)
+            return Err(ItemBuildError::NoAuthorsFound);
         }
 
         if self.content.is_none() {
-            Err(ItemBuildError::NoContent)
+            return Err(ItemBuildError::NoContent);
         }
 
-        match Url::parse(&self.url) {
+        if self.dates.is_none() {
+            return Err(ItemBuildError::NoDate);
+        }
+
+        match Url::parse(&self.url.clone().unwrap()) {
             Ok(parsed_url) => {
-                if let Some(external_url) = self.external_url {
+                if let Some(external_url) = self.external_url.clone() {
                     if let Err(parse_error) = Url::parse(&external_url) {
-                        Err(parse_error)
+                        return Err(ItemBuildError::MiscError(parse_error));
                     }
                 }
 
-                if let Some(image) = self.image {
+                if let Some(image) = self.image.clone() {
                     if let Err(parse_error) = Url::parse(&image) {
-                        Err(parse_error)
+                        return Err(ItemBuildError::MiscError(parse_error));
                     }
                 }
 
-                if let Some(banner) = self.banner {
+                if let Some(banner) = self.banner.clone() {
                     if let Err(parse_error) = Url::parse(&banner) {
-                        Err(parse_error)
+                        return Err(ItemBuildError::MiscError(parse_error));
                     }
                 }
 
                 Ok(Item {
                     id: self.id.clone().unwrap(),
                     url: parsed_url.clone(),
-                    external_url: if let Some(external_url) = self.external_url {
-                        Url::parse(&external_url).unwrap()
+                    external_url: if let Some(external_url) = self.external_url.clone() {
+                        Some(Url::parse(&external_url).unwrap())
                     } else {
                         None
                     },
-                    title: self.title,
-                    content: self.content.unwrap(),
-                    summary: self.summary,
-                    image: if let Some(image) = self.image {
+                    title: self.title.clone(),
+                    content: self.content.clone().unwrap(),
+                    summary: self.summary.clone(),
+                    image: if let Some(image) = self.image.clone() {
                         if let Ok(parsed_image_url) = Url::parse(&image) {
-                            Some(prsed_image_url)
+                            Some(parsed_image_url)
+                        } else {
+                            None
                         }
                     } else {
                         None
                     },
-                    banner: if let Some(banner) = self.banner {
+                    banner: if let Some(banner) = self.banner.clone() {
                         if let Ok(parsed_banner_url) = Url::parse(&banner) {
-                            Some(prsed_banner_url)
+                            Some(parsed_banner_url)
+                        } else {
+                            None
                         }
                     } else {
                         None
-                    }
+                    },
+                    dates: self.dates.clone().unwrap(),
+                    authors: self.authors.clone(),
+                    tags: self.tags.clone(),
+                    language: self.language.clone(),
+                    attachments: self.attachments.clone()
                 })
             },
-            Err(parse_error) => Err(parse_error)
+            Err(parse_error) => Err(ItemBuildError::MiscError(parse_error))
         }
     }
 }
