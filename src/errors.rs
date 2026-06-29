@@ -29,7 +29,7 @@ impl fmt::Display for AuthorBuildError {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
         match self {
             Self::MissingData => write!(f, "No data found. Please provide either a name, URL, or avatar URL."),
-            Self::URLParseError(parseError) => write!(f, "{}", parseError)
+            Self::URLParseError(parse_error) => write!(f, "{}", parse_error)
         }
     }
 }
