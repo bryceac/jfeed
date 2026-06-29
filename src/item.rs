@@ -18,10 +18,6 @@ pub struct Item {
     image: Option<Url>,
     #[serde(skip_serializing_if = "Option::is_none")]
     banner: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    published: Option<DateTime<Utc>>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    modified: Option<DateTime<Utc>>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     authors: Vec<Author>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
