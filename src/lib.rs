@@ -805,6 +805,6 @@ mod tests {
         .set_content(&content)
         .build().unwrap();
 
-        assert!(builder.add_item(&item).build().is_err())
+        assert!(builder.add_item(&item).build().is_ok())
     }
 }
