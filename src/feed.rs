@@ -31,20 +31,92 @@ pub struct Feed {
 
 #[derive(Default)]
 pub struct FeedBuilder {
-    version: Option<Url>,
+    version: Option<FeedVersion>,
     title: Option<String>,
-    homepage: Option<Url>,
-    url: Option<Url>,
+    homepage: Option<String>,
+    url: Option<String>,
     description: Option<String>,
     comment: Option<String>,
-    next_url: Option<Url>,
+    next_url: Option<String>,
     icon: Option<Url>,
-    favicon: Option<Url>,
+    favicon: Option<String>,
     authors: Vec<Author>,
     language: Option<String>,
     expired: bool,
     hubs: Vec<Hub>,
     items: Vec<Item>
+}
+
+impl FeedBuilder {
+    pub fn set_version(&mut self, version: &FeedVersion) -> &mut Self {
+        self.version = Some(version);
+        self
+    }
+
+    pub fn set_title(&mut self, title: &str) -> &mut Self {
+        self.title = Some(title.to_owned());
+        self
+    }
+
+    pub fn set_homepage(&mut self, homepage: &str) -> &mut Self {
+        self.homepage = Some(homepage.to_owned());
+        self
+    }
+
+    pub fn set_version(&mut self, version: &FeedVersion) -> &mut Self {
+        self.version = Some(version);
+        self
+    }
+
+    pub fn set_title(&mut self, title: &str) -> &mut Self {
+        self.title = Some(title.to_owned());
+        self
+    }
+
+    pub fn set_homepage(&mut self, homepage: &str) -> &mut Self {
+        self.homepage = Some(homepage.to_owned());
+        self
+    }
+
+    pub fn set_version(&mut self, version: &FeedVersion) -> &mut Self {
+        self.version = Some(version);
+        self
+    }
+
+    pub fn set_title(&mut self, title: &str) -> &mut Self {
+        self.title = Some(title.to_owned());
+        self
+    }
+
+    pub fn set_homepage(&mut self, homepage: &str) -> &mut Self {
+        self.homepage = Some(homepage.to_owned());
+        self
+    }
+
+    pub fn set_version(&mut self, version: &FeedVersion) -> &mut Self {
+        self.version = Some(version);
+        self
+    }
+
+    pub fn set_title(&mut self, title: &str) -> &mut Self {
+        self.title = Some(title.to_owned());
+        self
+    }
+
+    pub fn set_homepage(&mut self, homepage: &str) -> &mut Self {
+        self.homepage = Some(homepage.to_owned());
+        self
+    }
+
+    pub fn set_version(&mut self, version: &FeedVersion) -> &mut Self {
+        self.version = Some(version);
+        self
+    }
+
+    pub fn set_title(&mut self, title: &str) -> &mut Self {
+        self.title = Some(title.to_owned());
+        self
+    }
 }
 
 fn expired_is_default(expired: &bool) -> bool {
