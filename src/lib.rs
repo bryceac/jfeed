@@ -21,6 +21,7 @@ pub use crate::{
     dates::Dates as Dates,
     item::Item as Item,
     feed::Feed as Feed,
+    hub::Hub as Hub,
     version::Version as FeedVersion
 };
 
