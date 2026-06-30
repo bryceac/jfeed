@@ -449,7 +449,7 @@ mod tests {
         builder.set_id("https://example.com/hello_world.html");
         builder.set_url("https://example.com/hello_world.html");
         builder.set_title("Hello, World!");
-        builder.set_banner("image.png");
+        builder.set_banner_url("image.png");
         builder.set_dates(&dates);
         builder.add_author(&author);
         builder.set_content(&content);

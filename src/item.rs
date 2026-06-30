@@ -89,7 +89,7 @@ impl ItemBuilder {
         self
     }
 
-    pub fn set_banner(&mut self, banner: &str) -> &mut Self {
+    pub fn set_banner_url(&mut self, banner: &str) -> &mut Self {
         self.banner = Some(banner.to_owned());
         self
     }
