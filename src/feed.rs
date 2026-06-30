@@ -46,6 +46,25 @@ impl Feed {
     }
 }
 
+impl PartialEq for Feed {
+    fn eq(&self, other: &Self) -> bool {
+        self.version == other.version &&
+        self.title == other.title &&
+        self.homepage == other.homepage &&
+        self.url == other.url &&
+        self.description == other.description &&
+        self.comment == other.comment &&
+        self.next_url == other.next_url &&
+        self.icon_url == other.icon_url &&
+        self.favicon_url == other.favicon_url &&
+        self.authors == other.authors &&
+        self.language == other.language &&
+        self.expired == other.expired &&
+        self.hubs == other.hubs &&
+        self.items == other.items
+    }
+}
+
 #[derive(Default)]
 pub struct FeedBuilder {
     version: Option<FeedVersion>,
