@@ -20,6 +20,13 @@ impl Dates {
     }
 }
 
+impl PartialEq for Dates {
+    fn eq(&self, other: &Self) -> bool {
+        self.published == other.published &&
+        self.modified == other.modified
+    }
+}
+
 #[derive(Default)]
 pub struct DatesBuilder {
     published: Option<String>,

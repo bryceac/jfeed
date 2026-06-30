@@ -36,6 +36,24 @@ impl Item {
     }
 }
 
+impl PartialEq for Item {
+    fn eq(&self, other: &Self) -> bool {
+        self.id == other.id &&
+        self.url == other.url &&
+        self.external_url == other.external_url &&
+        self.title == other.title &&
+        self.content == other.content &&
+        self.summary == other.summary &&
+        self.image_url == other.image_url &&
+        self.banner_url == other.banner_url &&
+        self.dates == other.dates &&
+        self.authors == other.authors &&
+        self.tags == other.tags &&
+        self.language == other.language &&
+        self.attachments == other.attachments
+    }
+}
+
 #[derive(Default)]
 pub struct ItemBuilder {
     id: Option<String>,

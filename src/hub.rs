@@ -26,3 +26,10 @@ impl Hub {
         }
     }
 }
+
+impl PartialEq for Hub {
+    fn eq(&self, other: &Self) -> bool {
+        self.hub_type == other.hub_type &&
+        self.url == other.url
+    }
+}

@@ -18,6 +18,13 @@ impl Content {
     }
 }
 
+impl PartialEq for Content {
+    fn eq(&self, other: &Self) -> bool {
+        self.html == other.html &&
+        self.text == other.text
+    }
+}
+
 #[derive(Default)]
 pub struct ContentBuilder {
     html: Option<String>,
