@@ -491,6 +491,6 @@ mod tests {
 
     #[test]
     fn hub_can_be_initialized() {
-        assert!(Hub::from("Hello", "https://example.com/hello").is_err())
+        assert!(Hub::from("Hello", "https://example.com/hello").is_ok())
     }
 }
