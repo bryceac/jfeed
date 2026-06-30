@@ -141,59 +141,59 @@ impl FeedBuilder {
             return Err(FeedBuildError::MissItems);
         }
 
-        match Url::parse(&self.version.unwrap().to_string()) {
+        match Url::parse(&self.version.clone().unwrap().to_string()) {
             Ok(parsed_url) => {
-                if let Some(homepage) = self.homepage {
+                if let Some(homepage) = self.homepage.clone() {
                     if let Err(error) = Url::parse(&homepage) {
                         return Err(FeedBuildError::URLError(error))
                     }
                 }
 
-                if let Some(next_url) = self.next_url {
+                if let Some(next_url) = self.next_url.clone() {
                     if let Err(error) = Url::parse(&next_url) {
                         return Err(FeedBuildError::URLError(error))
                     }
                 }
 
-                if let Some(icon) = self.icon {
+                if let Some(icon) = self.icon.clone() {
                     if let Err(error) = Url::parse(&icon) {
                         return Err(FeedBuildError::URLError(error))
                     }
                 }
 
-                if let Some(favicon) = self.favicon {
+                if let Some(favicon) = self.favicon.clone() {
                     if let Err(error) = Url::parse(&favicon) {
                         return Err(FeedBuildError::URLError(error))
                     }
                 }
 
                 Ok(Feed { 
-                    version: parsed_url, 
-                    title: self.title.unwrap(), 
-                    homepage: Url::parse(&self.homepage.unwrap()).unwrap(), 
-                    url: parsed_url, 
-                    description: self.description, 
-                    comment: self.comment, 
-                    next_url: if let Some(next_url) = self.next_url {
+                    version: parsed_url.clone(), 
+                    title: self.title.clone().unwrap(), 
+                    homepage: Url::parse(&self.homepage.clone().unwrap()).unwrap(), 
+                    url: Url::parse(&self.url.clone().unwrap()).unwrap(), 
+                    description: self.description.clone(), 
+                    comment: self.comment.clone(), 
+                    next_url: if let Some(next_url) = self.next_url.clone() {
                         Some(Url::parse(&next_url).unwrap())
                     } else {
                         None
                     }, 
-                    icon: if let Some(icon_url) = self.icon {
+                    icon: if let Some(icon_url) = self.icon.clone() {
                         Some(Url::parse(&icon_url).unwrap())
                     } else {
                         None
                     }, 
-                    favicon: if let Some(favicon_url) = self.favicon {
-                        Some(Url::parse(&next_url).unwrap())
+                    favicon: if let Some(favicon_url) = self.favicon.clone() {
+                        Some(Url::parse(&favicon_url).unwrap())
                     } else {
                         None
                     }, 
-                    authors: self.authors, 
-                    language: self.language, 
+                    authors: self.authors.clone(), 
+                    language: self.language.clone(), 
                     expired: self.expired, 
-                    hubs: self.hubs, 
-                    items: self.items 
+                    hubs: self.hubs.clone(), 
+                    items: self.items.clone() 
                 })
             },
             Err(error) => Err(FeedBuildError::URLError(error))
