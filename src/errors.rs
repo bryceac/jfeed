@@ -135,7 +135,7 @@ impl fmt::Display for FeedBuildError {
             Self::MissingTitle => write!(f, "Feed must have a title."),
             Self::MissingHomePage => write!(f, "Feed must have a homepage."),
             Self::MissingURL => write!(f, "Feed must have a URL."),
-            Self::MissItems => write!(f, "Feed must contain at least 1 item.")
+            Self::MissItems => write!(f, "Feed must contain at least 1 item."),
             Self::URLError(parse_error) => write!(f, "{}", parse_error)
         }
     }
