@@ -5,6 +5,11 @@ use url::Url;
 
 use crate::AuthorBuildError;
 
+/**
+ * Holds Author information as described at the below address.
+ * 
+ * https://www.jsonfeed.org/version/1.1/index.html#top-level
+ */
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(try_from = "AuthorDes")]
 pub struct Author {
@@ -22,6 +27,10 @@ impl Author {
     }
 }
 
+/**
+ * Deserializing struct that is oly used to ensure the requirement
+ * of one piece of info is provided for an author.
+ */
 #[derive(Deserialize)]
 #[serde(transparent)]
 struct AuthorDes(HashMap<String, String>);
@@ -63,6 +72,9 @@ impl PartialEq for Author {
     }
 }
 
+/**
+ * A convenience building type, to make creating an author easy.
+ */
 #[derive(Default)]
 pub struct AuthorBuilder {
     name: Option<String>,
@@ -86,6 +98,11 @@ impl AuthorBuilder {
         self
     }
 
+    /**
+     * build an Author.
+     * Errors will be thrown if no data is provided or any URLs
+     * could not be parsed.
+     */
     pub fn build(&self) -> Result<Author, AuthorBuildError> {
         match (self.name.clone(), self.url.clone(), self.avatar_url.clone()) {
             (None, None, None) => Err(AuthorBuildError::MissingData),
