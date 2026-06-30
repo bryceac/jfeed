@@ -16,10 +16,10 @@ pub struct Feed {
     pub comment: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub next_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub icon: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub favicon: Option<Url>,
+    #[serde(rename = "icon", skip_serializing_if = "Option::is_none")]
+    pub icon_url: Option<Url>,
+    #[serde(rename = "favicon", skip_serializing_if = "Option::is_none")]
+    pub favicon_url: Option<Url>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub authors: Vec<Author>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -40,8 +40,8 @@ pub struct FeedBuilder {
     description: Option<String>,
     comment: Option<String>,
     next_url: Option<String>,
-    icon: Option<String>,
-    favicon: Option<String>,
+    icon_url: Option<String>,
+    favicon_url: Option<String>,
     authors: Vec<Author>,
     language: Option<String>,
     expired: bool,
@@ -85,13 +85,13 @@ impl FeedBuilder {
         self
     }
 
-    pub fn set_icon(&mut self, icon: &str) -> &mut Self {
-        self.icon = Some(icon.to_owned());
+    pub fn set_icon_url(&mut self, icon_url: &str) -> &mut Self {
+        self.icon_url = Some(icon_url.to_owned());
         self
     }
 
-    pub fn set_favicon(&mut self, favicon: &str) -> &mut Self {
-        self.favicon = Some(favicon.to_owned());
+    pub fn set_favicon_url(&mut self, favicon_url: &str) -> &mut Self {
+        self.favicon_url = Some(favicon_url.to_owned());
         self
     }
 
@@ -155,14 +155,14 @@ impl FeedBuilder {
                     }
                 }
 
-                if let Some(icon) = self.icon.clone() {
-                    if let Err(error) = Url::parse(&icon) {
+                if let Some(icon_url) = self.icon_url.clone() {
+                    if let Err(error) = Url::parse(&icon_url) {
                         return Err(FeedBuildError::URLError(error))
                     }
                 }
 
-                if let Some(favicon) = self.favicon.clone() {
-                    if let Err(error) = Url::parse(&favicon) {
+                if let Some(favicon_url) = self.favicon_url.clone() {
+                    if let Err(error) = Url::parse(&favicon_url) {
                         return Err(FeedBuildError::URLError(error))
                     }
                 }
@@ -179,12 +179,12 @@ impl FeedBuilder {
                     } else {
                         None
                     }, 
-                    icon: if let Some(icon_url) = self.icon.clone() {
+                    icon_url: if let Some(icon_url) = self.icon_url.clone() {
                         Some(Url::parse(&icon_url).unwrap())
                     } else {
                         None
                     }, 
-                    favicon: if let Some(favicon_url) = self.favicon.clone() {
+                    favicon_url: if let Some(favicon_url) = self.favicon_url.clone() {
                         Some(Url::parse(&favicon_url).unwrap())
                     } else {
                         None
