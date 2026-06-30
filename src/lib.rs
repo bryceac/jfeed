@@ -488,4 +488,9 @@ mod tests {
         hub_initialize_fails_when_both_items_are_empty();
         hub_initialization_fails_with_invalid_url();
     }
+
+    #[test]
+    fn hub_can_be_initialized() {
+        assert!(Hub::from("Hello", "https://example.com/hello").is_err())
+    }
 }
