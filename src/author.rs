@@ -55,8 +55,12 @@ impl TryFrom<AuthorDes> for Author {
     }
 }
 
-imp PartialEq for Author {
-    
+impl PartialEq for Author {
+    fn eq(&self, other: &Self) -> bool {
+        self.name == other.name &&
+        self.url == other.url &&
+        self.avatar_url == other.avatar_url
+    }
 }
 
 #[derive(Default)]
