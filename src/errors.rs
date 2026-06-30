@@ -128,7 +128,7 @@ pub enum FeedBuildError {
     URLError(URLParseError)
 }
 
-impl fmt::Display for FeedBuilderError {
+impl fmt::Display for FeedBuildError {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
         match self {
             Self::URLError(parse_error) => write!(f, "{}", parse_error)
@@ -136,4 +136,4 @@ impl fmt::Display for FeedBuilderError {
     }
 }
 
-impl Error for HubError {}
+impl Error for FeedBuildError {}
