@@ -765,4 +765,14 @@ mod tests {
         feed_building_fails_with_invalid_icon_url();
         feed_building_fails_with_invalid_favicon_url()
     }
+
+    #[test]
+    fn feed_building_fails_properly() {
+        feed_building_fails_without_version();
+        feed_building_fails_without_url();
+        feed_building_fails_without_title();
+        feed_building_fails_without_homepage();
+        feed_building_fails_without_items();
+        feed_building_fails_with_invalid_urls();
+    }
 }
