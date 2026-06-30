@@ -882,6 +882,7 @@ mod tests {
             \"items\": [
                 {
                     \"id\": \"https://example.com/hello_world.html\",
+                    \"title\": \"Hello, World!\",
                     \"content_text\": \"Hello, World!\",
                     \"url\": \"https://example.com/hello_world.html\",
                     \"date_published\": \"2026-06-28T08:55:00Z\",
