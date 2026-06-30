@@ -477,10 +477,15 @@ mod tests {
         assert!(Hub::from("", "").is_err())
     }
 
+    fn hub_initialization_fails_with_invalid_url() {
+        assert!(Hub::from("Hello", "html").is_err())
+    }
+
     #[test]
     fn hub_initialization_fails_properly() {
         hub_initialization_fails_if_type_is_empty();
         hub_initialization_fails_if_url_is_empty();
         hub_initialize_fails_when_both_items_are_empty();
+        hub_initialization_fails_with_invalid_url();
     }
 }
