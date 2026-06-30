@@ -493,4 +493,45 @@ mod tests {
     fn hub_can_be_initialized() {
         assert!(Hub::from("Hello", "https://example.com/hello").is_ok())
     }
+
+    fn feed_building_fails_without_items() {
+        let mut builder = Feed::builder();
+        builder.set_version(&FeedVersion::JSONFeed1_1);
+        builder.set_title("News");
+        builder.set_homepage("https://example.com");
+        builder.set_url("https://example.com/feed.json");
+
+        assert!(builder.build().is_err())
+    }
+
+    fn feed_building_fails_without_version() {
+        let mut builder = Feed::builder();
+        builder.set_title("News");
+        builder.set_homepage("https://example.com");
+        builder.set_url("https://example.com/feed.json");
+
+        let dates = Dates::builder()
+        .set_published("2026-06-28T08:55:00Z")
+        .build().unwrap();
+
+        let author = Author::builder()
+        .set_name("Jerry")
+        .build().unwrap();
+
+        let content = Content::builder()
+        .set_text("Hello, World!")
+        .build().unwrap();
+
+        let mut item_builder = Item::builder()
+        .set_id("https://example.com/hello_world.html")
+        .set_url("https://example.com/hello_world.html")
+        .set_title("Hello, World!")
+        .set_banner_url("image.png")
+        .set_dates(&dates)
+        .add_author(&author)
+        .set_content(&content)
+        .build().unwrap();
+
+        assert!(builder.build().is_err())
+    }
 }
