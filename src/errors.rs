@@ -117,3 +117,23 @@ impl fmt::Display for HubError {
 }
 
 impl Error for HubError {}
+
+#[derive(Debug)]
+pub enum FeedBuildError {
+    MissingVersion,
+    MissingTitle,
+    MissingHomePage,
+    MissingURL,
+    MissItems,
+    URLError(URLParseError)
+}
+
+impl fmt::Display for FeedBuilderError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::URLError(parse_error) => write!(f, "{}", parse_error)
+        }
+    }
+}
+
+impl Error for HubError {}
