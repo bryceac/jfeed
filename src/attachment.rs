@@ -85,6 +85,7 @@ impl AttachmentBuilder {
     /**
      * Build an attachment.
      * If any errors occur, an AttachmentBuldError will be returned.
+     * ParseError will be thrown if URL cannot be parsed.
      */
     pub fn build(&self) -> Result<Attachment, AttachmentBuildError> {
         match (self.url.clone(), self.mime_type.clone()) {
