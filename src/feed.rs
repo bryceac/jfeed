@@ -68,6 +68,11 @@ impl FeedBuilder {
         self
     }
 
+    pub fn set_description(&mut self, description: &str) -> &mut Self {
+        self.description = Some(description.to_owned());
+        self
+    }
+
     pub fn set_comment(&mut self, comment: &str) -> &mut Self {
         self.comment = Some(comment.to_owned());
         self
@@ -93,28 +98,23 @@ impl FeedBuilder {
         self
     }
 
-    pub fn set_version(&mut self, version: &FeedVersion) -> &mut Self {
-        self.version = Some(version);
+    pub fn set_language(&mut self, language: &str) -> &mut Self {
+        self.language = Some(language.to_owned());
         self
     }
 
-    pub fn set_title(&mut self, title: &str) -> &mut Self {
-        self.title = Some(title.to_owned());
+    pub fn set_expired(&mut self, expired: &bool) -> &mut Self {
+        self.expired = *expired;
         self
     }
 
-    pub fn set_homepage(&mut self, homepage: &str) -> &mut Self {
-        self.homepage = Some(homepage.to_owned());
+    pub fn add_hub(&mut self, hub: &Hub) -> &mut Self {
+        self.hubs.push(hub.clone());
         self
     }
 
-    pub fn set_version(&mut self, version: &FeedVersion) -> &mut Self {
-        self.version = Some(version);
-        self
-    }
-
-    pub fn set_title(&mut self, title: &str) -> &mut Self {
-        self.title = Some(title.to_owned());
+    pub fn add_item(&mut self, item: &Item) -> &mut Self {
+        self.items.push(item.clone());
         self
     }
 }
