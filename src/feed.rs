@@ -49,7 +49,7 @@ pub struct FeedBuilder {
 
 impl FeedBuilder {
     pub fn set_version(&mut self, version: &FeedVersion) -> &mut Self {
-        self.version = Some(version);
+        self.version = Some(version.clone());
         self
     }
 
