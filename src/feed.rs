@@ -26,7 +26,23 @@ pub struct Feed {
     pub expired: bool,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub hubs: Vec<Hub>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub items: Vec<Item>
+}
+
+pub struct FeedBuilder {
+    version: Url,
+    title: String,
+    homepage: Url,
+    url: Url,
+    description: Option<String>,
+    comment: Option<String>,
+    next_url: Option<Url>,
+    icon: Option<Url>,
+    favicon: Option<Url>,
+    authors: Vec<Author>,
+    language: Option<String>,
+    expired: bool,
+    hubs: Vec<Hub>,
     pub items: Vec<Item>
 }
 
