@@ -1,4 +1,5 @@
 use serde::{ Serialize, Deserialize };
+use serde_json::Result as JSONResult;
 use url::Url;
 use crate::{FeedVersion, Author, Item, Hub, FeedBuildError};
 
@@ -29,6 +30,20 @@ pub struct Feed {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub hubs: Vec<Hub>,
     pub items: Vec<Item>
+}
+
+impl Feed {
+    pub fn builder() -> FeedBuilder {
+        FeedBuilder::default()
+    }
+
+    pub fn from_str(text: &str) -> JSONResult<Self> {
+        serde_json::from_str(&text)
+    }
+
+    pub fn to_string(&self) -> JSONResult<String> {
+        serde_json::to_string_pretty(&self)
+    }
 }
 
 #[derive(Default)]
