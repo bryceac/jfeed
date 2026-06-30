@@ -776,13 +776,13 @@ mod tests {
         feed_building_fails_with_invalid_urls();
     }
 
+    #[test]
     fn can_build_feed() {
         let mut builder = Feed::builder();
         builder.set_version(&FeedVersion::JSONFeed1_1);
         builder.set_title("News");
         builder.set_homepage("https://example.com/");
         builder.set_url("https://example.com/feed.json");
-        builder.set_favicon_url("hello.png");
 
         let dates = Dates::builder()
         .set_published("2026-06-28T08:55:00Z")
@@ -800,7 +800,6 @@ mod tests {
         .set_id("https://example.com/hello_world.html")
         .set_url("https://example.com/hello_world.html")
         .set_title("Hello, World!")
-        .set_banner_url("https://example.com/image.png")
         .set_dates(&dates)
         .add_author(&author)
         .set_content(&content)
