@@ -131,6 +131,11 @@ pub enum FeedBuildError {
 impl fmt::Display for FeedBuildError {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
         match self {
+            Self::MissingVersion => write!(f, "Feed Must have a version."),
+            Self::MissingTitle => write!(f, "Feed must have a title."),
+            Self::MissingHomePage => write!(f, "Feed must have a homepage."),
+            Self::MissingURL => write!(f, "Feed must have a URL."),
+            Self::MissItems => write!(f, "Feed must contain at least 1 item.")
             Self::URLError(parse_error) => write!(f, "{}", parse_error)
         }
     }

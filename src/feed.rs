@@ -6,7 +6,9 @@ use crate::{FeedVersion, Author, Item, Hub};
 pub struct Feed {
     pub version: Url,
     pub title: String,
+    #[serde(rename ="home_page_url")]
     pub homepage: Url,
+    #[serde(rename = "feed_url")]
     pub url: Url,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
