@@ -142,7 +142,49 @@ impl FeedBuilder {
         }
 
         match Url::parse(&self.version.unwrap().to_string()) {
-            todo!()
+            Ok(parsed_url) => {
+                if let Some(homepage) = self.homepage {
+                    if let Err(error) = Url::parse(&homepage) {
+                        return Err(FeedBuildError::URLError(error))
+                    }
+                }
+
+                if let Some(next_url) = self.next_url {
+                    if let Err(error) = Url::parse(&next_url) {
+                        return Err(FeedBuildError::URLError(error))
+                    }
+                }
+
+                if let Some(icon) = self.icon {
+                    if let Err(error) = Url::parse(&icon) {
+                        return Err(FeedBuildError::URLError(error))
+                    }
+                }
+
+                if let Some(favicon) = self.favicon {
+                    if let Err(error) = Url::parse(&favicon) {
+                        return Err(FeedBuildError::URLError(error))
+                    }
+                }
+
+                Ok(Feed { 
+                    version: parsed_url, 
+                    title: self.title.unwrap(), 
+                    homepage: (), 
+                    url: (), 
+                    description: (), 
+                    comment: (), 
+                    next_url: (), 
+                    icon: (), 
+                    favicon: (), 
+                    authors: (), 
+                    language: (), 
+                    expired: (), 
+                    hubs: (), 
+                    items: () 
+                })
+            },
+            Err(error) => Err(FeedBuildError::URLError(error))
         }
     }
 }
