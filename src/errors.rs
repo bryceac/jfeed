@@ -1,3 +1,4 @@
+use core::num::dec2flt::parse;
 use std::{ error::Error, fmt };
 use url::ParseError as URLParseError;
 use chrono::format::ParseError as ChronoParseError;
@@ -96,3 +97,24 @@ impl fmt::Display for ItemBuildError {
 }
 
 impl Error for ItemBuildError {}
+
+#[derive(Debug)]
+pub enum HubError {
+    NoType,
+    NoURL,
+    MissingAll,
+    URLError(URLParseError)
+}
+
+impl fmt::Display for HubError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::MissingAll => write!(f, "Hubs must provide a type and a URL"),
+            Self::NoURL => write!(f, "Hubs must have a URL."),
+            Self::NoType => write!(f, "Hubs must have a type."),
+            Self::URLError(parse_error) => write!(f, "{}", parse_error)
+        }
+    }
+}
+
+impl Error for HubError {}
