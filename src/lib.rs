@@ -886,7 +886,9 @@ mod tests {
                     \"url:\" \"https://example.com/hello_world.html\",
                     \"date_published:\" \"2026-06-28T08:55:00Z\",
                     \"authors:\" [
-                        \"name:\" \"Jerry\"
+                        {
+                            \"name:\" \"Jerry\"
+                        }
                     ]
                 }
             ],
