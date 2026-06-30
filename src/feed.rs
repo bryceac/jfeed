@@ -140,6 +140,10 @@ impl FeedBuilder {
         if self.items.is_empty() {
             return Err(FeedBuildError::MissItems);
         }
+
+        match Url::parse(&self.version.unwrap().to_string()) {
+            todo!()
+        }
     }
 }
 
