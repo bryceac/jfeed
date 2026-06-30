@@ -659,4 +659,110 @@ mod tests {
 
         assert!(builder.add_item(&item).build().is_err())
     }
+
+    fn feed_building_fails_with_invalid_next_url() {
+        let mut builder = Feed::builder();
+        builder.set_version(&FeedVersion::JSONFeed1_1);
+        builder.set_title("News");
+        builder.set_homepage("https://example.com/");
+        builder.set_url("https://example.com/feed.json");
+        builder.set_next_url("feed2.json");
+
+        let dates = Dates::builder()
+        .set_published("2026-06-28T08:55:00Z")
+        .build().unwrap();
+
+        let author = Author::builder()
+        .set_name("Jerry")
+        .build().unwrap();
+
+        let content = Content::builder()
+        .set_text("Hello, World!")
+        .build().unwrap();
+
+        let item = Item::builder()
+        .set_id("https://example.com/hello_world.html")
+        .set_url("https://example.com/hello_world.html")
+        .set_title("Hello, World!")
+        .set_banner_url("image.png")
+        .set_dates(&dates)
+        .add_author(&author)
+        .set_content(&content)
+        .build().unwrap();
+
+        assert!(builder.add_item(&item).build().is_err())
+    }
+
+    fn feed_building_fails_with_invalid_icon_url() {
+        let mut builder = Feed::builder();
+        builder.set_version(&FeedVersion::JSONFeed1_1);
+        builder.set_title("News");
+        builder.set_homepage("https://example.com/");
+        builder.set_url("https://example.com/feed.json");
+        builder.set_icon_url("hello.png");
+
+        let dates = Dates::builder()
+        .set_published("2026-06-28T08:55:00Z")
+        .build().unwrap();
+
+        let author = Author::builder()
+        .set_name("Jerry")
+        .build().unwrap();
+
+        let content = Content::builder()
+        .set_text("Hello, World!")
+        .build().unwrap();
+
+        let item = Item::builder()
+        .set_id("https://example.com/hello_world.html")
+        .set_url("https://example.com/hello_world.html")
+        .set_title("Hello, World!")
+        .set_banner_url("image.png")
+        .set_dates(&dates)
+        .add_author(&author)
+        .set_content(&content)
+        .build().unwrap();
+
+        assert!(builder.add_item(&item).build().is_err())
+    }
+
+    fn feed_building_fails_with_invalid_favicon_url() {
+        let mut builder = Feed::builder();
+        builder.set_version(&FeedVersion::JSONFeed1_1);
+        builder.set_title("News");
+        builder.set_homepage("https://example.com/");
+        builder.set_url("https://example.com/feed.json");
+        builder.set_favicon_url("hello.png");
+
+        let dates = Dates::builder()
+        .set_published("2026-06-28T08:55:00Z")
+        .build().unwrap();
+
+        let author = Author::builder()
+        .set_name("Jerry")
+        .build().unwrap();
+
+        let content = Content::builder()
+        .set_text("Hello, World!")
+        .build().unwrap();
+
+        let item = Item::builder()
+        .set_id("https://example.com/hello_world.html")
+        .set_url("https://example.com/hello_world.html")
+        .set_title("Hello, World!")
+        .set_banner_url("image.png")
+        .set_dates(&dates)
+        .add_author(&author)
+        .set_content(&content)
+        .build().unwrap();
+
+        assert!(builder.add_item(&item).build().is_err())
+    }
+
+    fn feed_building_fails_with_invalid_urls() {
+        feed_building_fails_with_invalid_url();
+        feed_building_fails_with_invalid_next_url();
+        feed_building_fails_with_invalid_icon_url();
+        feed_building_fails_with_invalid_favicon_url()
+    }
 }
