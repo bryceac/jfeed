@@ -808,6 +808,7 @@ mod tests {
         assert!(builder.add_item(&item).build().is_ok())
     }
 
+    #[test]
     fn feed_converts_to_string() {
         let mut builder = Feed::builder();
         builder.set_version(&FeedVersion::JSONFeed1_1);
