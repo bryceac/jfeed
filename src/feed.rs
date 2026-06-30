@@ -1,6 +1,6 @@
 use serde::{ Serialize, Deserialize };
 use url::Url;
-use crate::{FeedVersion, Author, Item};
+use crate::{FeedVersion, Author, Item, hub::Hub};
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Feed {
@@ -25,7 +25,7 @@ pub struct Feed {
     #[serde(default, skip_serializing_if = "expired_is_default")]
     pub expired: bool,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub hubs: Vec<String>,
+    pub hubs: Vec<Hub>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub items: Vec<Item>
 }
