@@ -15,8 +15,8 @@ This crate is currently a <abbr title="work in progress">WIP</abbr>, and has not
 ### To Do
 
 <ul>
-<li>Finish implementing the necessary elements, as outlined in the <a href="https://www.jsonfeed.org/version/1.1/">JSON Feed 1.1 spec</a> (nearly there. Hubs need to be added.)</l>
-<li>Write tests for Feed generation.</p>
+<li>Work on feed creation.</li>
+<li>Write tests for feed generation.</li>
 <li>Write tests regarding feed parsing, to make sure things are generated as expected.</p>
 </ul>
 
