@@ -426,7 +426,7 @@ mod tests {
         builder.set_title("Hello, World!");
         builder.set_dates(&dates);
         builder.add_author(&author);
-        builder.set_image("image.png");
+        builder.set_image_url("image.png");
         builder.set_content(&content);
 
         assert!(builder.build().is_err())

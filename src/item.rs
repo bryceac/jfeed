@@ -84,7 +84,7 @@ impl ItemBuilder {
         self
     }
 
-    pub fn set_image(&mut self, image: &str) -> &mut Self {
+    pub fn set_image_url(&mut self, image: &str) -> &mut Self {
         self.image = Some(image.to_owned());
         self
     }
