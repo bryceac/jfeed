@@ -4,7 +4,7 @@ use crate::{FeedVersion, Author, Item};
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Feed {
-    pub version: FeedVersion,
+    pub version: Url,
     pub title: String,
     pub homepage: Url,
     pub url: Url,
