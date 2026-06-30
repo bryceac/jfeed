@@ -871,8 +871,28 @@ mod tests {
         .set_content(&content)
         .build().unwrap();
         builder.add_item(&item);
-        let feed = builder.build().unwrap();
+        let expected_feed = builder.build().unwrap();
 
-        todo!()
+        let feed = "
+        {
+            \"version:\" \"https://jsonfeed.org/version/1.1\",
+            \"title:\" \"News\",
+            \"homepage:\" \"https://example.com/\",
+            \"feed_url:\" \"https://example.com/feed.json\",
+            \"items:\" [
+                {
+                    \"id:\" \"https://example.com/hello_world.html\",
+                    \"content_text:\" \"Hello, World!\",
+                    \"url:\" \"https://example.com/hello_world.html\",
+                    \"date_published:\" \"2026-06-28T08:55:00Z\",
+                    \"authors:\" [
+                        \"name:\" \"Jerry\"
+                    ]
+                }
+            ],
+        }
+        ";
+        
+        assert_eq!(Feed::from_str(feed).unwrap(), expected_feed)
     }
 }
