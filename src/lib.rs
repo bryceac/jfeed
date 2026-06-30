@@ -464,4 +464,23 @@ mod tests {
         item_build_fails_with_invalid_banner_url();
         item_build_fails_with_invalid_image_url();
     }
+
+    fn hub_initialization_fails_if_type_is_empty() {
+        assert!(Hub::from("", "https://example.com").is_err())
+    }
+
+    fn hub_initialization_fails_if_url_is_empty() {
+        assert!(Hub::from("Hello", "").is_err())
+    }
+
+    fn hub_initialize_fails_when_both_items_are_empty() {
+        assert!(Hub::from("", "").is_err())
+    }
+
+    #[test]
+    fn hub_initialization_fails_properly() {
+        hub_initialization_fails_if_type_is_empty();
+        hub_initialization_fails_if_url_is_empty();
+        hub_initialize_fails_when_both_items_are_empty();
+    }
 }
