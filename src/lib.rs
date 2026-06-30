@@ -892,8 +892,7 @@ mod tests {
                     ]
                 }
             ]
-        }
-        ";
+        }";
         
         assert_eq!(Feed::from_str(feed).unwrap(), expected_feed)
     }
