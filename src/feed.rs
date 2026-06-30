@@ -29,11 +29,12 @@ pub struct Feed {
     pub items: Vec<Item>
 }
 
+#[derive(Default)]
 pub struct FeedBuilder {
-    version: Url,
-    title: String,
-    homepage: Url,
-    url: Url,
+    version: Option<Url>,
+    title: Option<String>,
+    homepage: Option<Url>,
+    url: Option<Url>,
     description: Option<String>,
     comment: Option<String>,
     next_url: Option<Url>,
@@ -43,7 +44,7 @@ pub struct FeedBuilder {
     language: Option<String>,
     expired: bool,
     hubs: Vec<Hub>,
-    pub items: Vec<Item>
+    items: Vec<Item>
 }
 
 fn expired_is_default(expired: &bool) -> bool {
