@@ -170,18 +170,30 @@ impl FeedBuilder {
                 Ok(Feed { 
                     version: parsed_url, 
                     title: self.title.unwrap(), 
-                    homepage: (), 
-                    url: (), 
-                    description: (), 
-                    comment: (), 
-                    next_url: (), 
-                    icon: (), 
-                    favicon: (), 
-                    authors: (), 
-                    language: (), 
-                    expired: (), 
-                    hubs: (), 
-                    items: () 
+                    homepage: Url::parse(&self.homepage.unwrap()).unwrap(), 
+                    url: parsed_url, 
+                    description: self.description, 
+                    comment: self.comment, 
+                    next_url: if let Some(next_url) = self.next_url {
+                        Some(Url::parse(&next_url).unwrap())
+                    } else {
+                        None
+                    }, 
+                    icon: if let Some(icon_url) = self.icon {
+                        Some(Url::parse(&icon_url).unwrap())
+                    } else {
+                        None
+                    }, 
+                    favicon: if let Some(favicon_url) = self.favicon {
+                        Some(Url::parse(&next_url).unwrap())
+                    } else {
+                        None
+                    }, 
+                    authors: self.authors, 
+                    language: self.language, 
+                    expired: self.expired, 
+                    hubs: self.hubs, 
+                    items: self.items 
                 })
             },
             Err(error) => Err(FeedBuildError::URLError(error))
