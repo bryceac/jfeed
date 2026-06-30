@@ -17,7 +17,7 @@ pub struct Item {
     #[serde(skip_serializing_if = "Option::is_none")]
     image_url: Option<Url>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    banner: Option<Url>,
+    banner_url: Option<Url>,
     #[serde(flatten)]
     dates: Dates,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -45,7 +45,7 @@ pub struct ItemBuilder {
     content: Option<Content>,
     summary: Option<String>,
     image_url: Option<String>,
-    banner: Option<String>,
+    banner_url: Option<String>,
     dates: Option<Dates>,
     authors: Vec<Author>,
     tags: Vec<String>,
@@ -89,8 +89,8 @@ impl ItemBuilder {
         self
     }
 
-    pub fn set_banner_url(&mut self, banner: &str) -> &mut Self {
-        self.banner = Some(banner.to_owned());
+    pub fn set_banner_url(&mut self, banner_url: &str) -> &mut Self {
+        self.banner_url = Some(banner_url.to_owned());
         self
     }
 
@@ -154,8 +154,8 @@ impl ItemBuilder {
                     }
                 }
 
-                if let Some(banner) = self.banner.clone() {
-                    if let Err(parse_error) = Url::parse(&banner) {
+                if let Some(banner_url) = self.banner_url.clone() {
+                    if let Err(parse_error) = Url::parse(&banner_url) {
                         return Err(ItemBuildError::MiscError(parse_error));
                     }
                 }
@@ -180,8 +180,8 @@ impl ItemBuilder {
                     } else {
                         None
                     },
-                    banner: if let Some(banner) = self.banner.clone() {
-                        if let Ok(parsed_banner_url) = Url::parse(&banner) {
+                    banner_url: if let Some(banner_url) = self.banner_url.clone() {
+                        if let Ok(parsed_banner_url) = Url::parse(&banner_url) {
                             Some(parsed_banner_url)
                         } else {
                             None
