@@ -8,9 +8,9 @@ use crate::DatesBuildError;
 #[derive(Deserialize, Clone, Debug)]
 #[serde(try_from = "DatesDes")]
 pub struct Dates {
-    #[serde(rename = "date_published")]
+    #[serde(rename = "date_published", skip_serializing_if = "Option::is_none")]
     pub published: Option<DateTime<Utc>>,
-    #[serde(rename = "date_modified")]
+    #[serde(rename = "date_modified", skip_serializing_if = "Option::is_none")]
     pub modified: Option<DateTime<Utc>>,
 }
 
