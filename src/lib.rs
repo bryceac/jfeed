@@ -97,7 +97,7 @@ mod tests {
     #[test]
     fn author_building_fails_with_invalid_avatar() {
         assert!(Author::builder()
-        .set_avatar("mp4")
+        .set_avatar_url("mp4")
         .build().is_err())
     }
 
@@ -113,7 +113,7 @@ mod tests {
     fn author_building_fails_with_name_but_invalid_avatar() {
         assert!(Author::builder()
         .set_name("Jerry")
-        .set_avatar("mp4")
+        .set_avatar_url("mp4")
         .build().is_err())
     }
 
@@ -122,7 +122,7 @@ mod tests {
         assert!(Author::builder()
         .set_name("Jerry")
         .set_url("html")
-        .set_avatar("mp4")
+        .set_avatar_url("mp4")
         .build().is_err())
     }
 
@@ -143,7 +143,7 @@ mod tests {
     #[test]
     fn create_author_with_only_avatar() {
         assert!(Author::builder()
-        .set_avatar("https://example.com/jerry.png")
+        .set_avatar_url("https://example.com/jerry.png")
         .build().is_ok())
     }
 
@@ -151,7 +151,7 @@ mod tests {
     fn create_author_with_only_url_and_avatar() {
         assert!(Author::builder()
         .set_url("https://example.com")
-        .set_avatar("https://example.com/jerry.png")
+        .set_avatar_url("https://example.com/jerry.png")
         .build().is_ok())
     }
 
@@ -167,7 +167,7 @@ mod tests {
     fn create_author_with_only_name_and_avatar() {
         assert!(Author::builder()
         .set_name("Jerry")
-        .set_avatar("https://example.com/jerry.png")
+        .set_avatar_url("https://example.com/jerry.png")
         .build().is_ok())
     }
 
@@ -176,7 +176,7 @@ mod tests {
         let mut builder = Author::builder();
         builder.set_name("Jerry");
         builder.set_url("https://example.com");
-        builder.set_avatar("https://example.com/jerry.png");
+        builder.set_avatar_url("https://example.com/jerry.png");
 
     assert!(builder.build().is_ok())
     }
