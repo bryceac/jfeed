@@ -1,4 +1,3 @@
-use core::num::dec2flt::parse;
 use std::{ error::Error, fmt };
 use url::ParseError as URLParseError;
 use chrono::format::ParseError as ChronoParseError;
