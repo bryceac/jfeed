@@ -75,7 +75,7 @@ struct DatesDes(HashMap<String, String>);
 impl TryFrom<DatesDes> for Dates {
     type Error = DatesBuildError;
 
-    fn try_from(value: &mut  DatesDes) -> Result<Self, Self::Error> {
+    fn try_from(value: DatesDes) -> Result<Self, Self::Error> {
         if value.0.is_empty() {
             return Err(DatesBuildError::NoDates);
         }
