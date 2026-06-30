@@ -55,6 +55,10 @@ impl TryFrom<AuthorDes> for Author {
     }
 }
 
+imp PartialEq for Author {
+    
+}
+
 #[derive(Default)]
 pub struct AuthorBuilder {
     name: Option<String>,
