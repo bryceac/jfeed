@@ -877,7 +877,7 @@ mod tests {
         {
             \"version\": \"https://jsonfeed.org/version/1.1\",
             \"title\": \"News\",
-            \"homepage\": \"https://example.com/\",
+            \"home_page_url\": \"https://example.com/\",
             \"feed_url\": \"https://example.com/feed.json\",
             \"items\": [
                 {
