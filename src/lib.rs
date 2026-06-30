@@ -15,7 +15,7 @@ pub use crate::{
     errors::ContentBuildError as ContentBuildError,
     errors::DatesBuildError as DatesBuildError,
     errors::ItemBuildError as ItemBuildError,
-    errors::FeedBuildError as FeedBuilderError,
+    errors::FeedBuildError as FeedBuildError,
     errors::HubError as HubError,
     author::Author as Author,
     content::Content as Content,
