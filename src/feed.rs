@@ -164,6 +164,12 @@ impl FeedBuilder {
                     }
                 }
 
+                if let Some(feed_url) = self.url.clone() {
+                    if let Err(error) = Url::parse(&feed_url) {
+                        return Err(FeedBuildError::URLError(error))
+                    }
+                }
+
                 if let Some(next_url) = self.next_url.clone() {
                     if let Err(error) = Url::parse(&next_url) {
                         return Err(FeedBuildError::URLError(error))
