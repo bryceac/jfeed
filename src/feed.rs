@@ -1,6 +1,6 @@
 use serde::{ Serialize, Deserialize };
 use url::Url;
-use crate::{FeedVersion, Author, Item, Hub};
+use crate::{FeedVersion, Author, Item, Hub, FeedBuildError};
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Feed {
@@ -118,6 +118,28 @@ impl FeedBuilder {
     pub fn add_item(&mut self, item: &Item) -> &mut Self {
         self.items.push(item.clone());
         self
+    }
+
+    pub fn build(&self) -> Result<Feed, FeedBuildError> {
+        if self.version.is_none()  {
+            return Err(FeedBuildError::MissingVersion);
+        }
+
+        if self.title.is_none() {
+            return  Err(FeedBuildError::MissingTitle);
+        }
+
+        if self.homepage.is_none() {
+            return Err(FeedBuildError::MissingHomePage);
+        }
+
+        if self.url.is_none() {
+            return Err(FeedBuildError::MissingURL);
+        }
+
+        if self.items.is_empty() {
+            return Err(FeedBuildError::MissItems);
+        }
     }
 }
 
