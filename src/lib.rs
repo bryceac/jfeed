@@ -526,7 +526,7 @@ mod tests {
         .set_id("https://example.com/hello_world.html")
         .set_url("https://example.com/hello_world.html")
         .set_title("Hello, World!")
-        .set_banner_url("image.png")
+        .set_banner_url("https://example.com/image.png")
         .set_dates(&dates)
         .add_author(&author)
         .set_content(&content)
