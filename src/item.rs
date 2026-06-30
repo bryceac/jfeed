@@ -26,7 +26,7 @@ pub struct Item {
     tags: Vec<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     language: Option<String>,
-    #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     attachments: Vec<Attachment>
 }
 
