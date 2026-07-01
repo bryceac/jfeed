@@ -53,6 +53,12 @@ and, to fit that purpose, things like dates and contentmare important.</p>
 <p>If you need more flexibility, you&#39;ll either want to look for a different crate or fork this one and make things more flexible.</p>
 </dd>
 </li>
+<li>
+<dt style="font-weight:bold">Your other crates are able to read/write files directly. Why doesn't this one></dt>
+<dd>
+<p>I have thought of doing that, but considering that you need to retrieve a string anyway to parse content, I decided to not do that.</p>
+</dd>
+</li>
 </ol>
 
 ### Creating A Feed
