@@ -32,6 +32,7 @@ impl PartialEq for Dates {
     }
 }
 
+/// A convenience type to create dates easily.
 #[derive(Default)]
 pub struct DatesBuilder {
     published: Option<String>,
@@ -49,6 +50,14 @@ impl DatesBuilder {
         self
     }
 
+    /**
+     * build dates.
+     * 
+     * as dates are expected to be in RFC 3339 format, errors will be
+     * thrown if they aren't.
+     * 
+     * Also, an error will be thrown if no date is given.
+     */
     pub fn build(&self) -> Result<Dates, DatesBuildError> {
         match (self.published.clone(), self.modified.clone()) {
             (Some(published), Some(modified)) => if let Err(error) = DateTime::parse_from_rfc3339(&published) {
@@ -80,6 +89,7 @@ impl DatesBuilder {
     }
 }
 
+/// deserializing struct that makes sure a date is present.
 #[derive(Deserialize)]
 #[serde(transparent)]
 struct DatesDes(HashMap<String, String>);
