@@ -72,9 +72,7 @@ impl PartialEq for Author {
     }
 }
 
-/**
- * A convenience building type, to make creating an author easy.
- */
+/// A convenience building type to make creating an author easy.
 #[derive(Default)]
 pub struct AuthorBuilder {
     name: Option<String>,

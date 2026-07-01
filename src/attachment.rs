@@ -44,9 +44,7 @@ impl PartialEq for Attachment {
     } 
 }
 
-/**
- * A convenience building type, to make it easy to create an attacment.
- */
+ /// A convenience building type to make it easy to create an attacment.
 #[derive(Default)]
 pub struct AttachmentBuilder {
     url: Option<String>,
