@@ -6,7 +6,7 @@ use crate::ContentBuildError;
 /**
  * Item content as described at the below address.
  * 
- * https://www.jsonfeed.org/version/1.1/index.html#items.
+ * https://www.jsonfeed.org/version/1.1/index.html#items
  */
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(try_from = "ContentDes")]

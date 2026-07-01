@@ -5,6 +5,11 @@ use serde::{ Serialize, Deserialize, Serializer, ser::SerializeStruct };
 
 use crate::DatesBuildError;
 
+/**
+ * Date fields, as described at the address below.
+ * 
+ * https://www.jsonfeed.org/version/1.1/index.html#items
+ */
 #[derive(Deserialize, Clone, Debug)]
 #[serde(try_from = "DatesDes")]
 pub struct Dates {
