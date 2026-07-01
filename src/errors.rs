@@ -2,6 +2,10 @@ use std::{ error::Error, fmt };
 use url::ParseError as URLParseError;
 use chrono::format::ParseError as ChronoParseError;
 
+/**
+ * The possible errors that can occur when
+ * building an attachment.
+*/
 #[derive(Debug)]
 pub enum AttachmentBuildError {
     URLNotFound,
@@ -23,6 +27,9 @@ impl fmt::Display for AttachmentBuildError {
 
 impl Error for AttachmentBuildError {}
 
+/**
+ * The errors that can occur when building an author.
+ */
 #[derive(Debug)]
 pub enum AuthorBuildError {
     MissingData,
