@@ -116,9 +116,23 @@ let mut attachment = Attachment::builder()
 Any type with data that has optional components will have a builder pattern,
 while those, like Hubs, that require everything does not have a builder pattern.
 
+### Limitations
+
+Aside from some things being required for feeds that the JSON spec claims to be optional, this crate does not support extensions, which are talked about <a href="jsonfeed.org/version/1.1/index.html#extensions">here</a>.
+
+If you need them, you can either add them in and make a pull request or
+you can look elsewhere, since I don't plan to implement them until I need them.
+
 ### Contributing
 
 If you would like to help make this crate better, feel free to fork this repo and make a pull request.
 
 Please be aware that your contributions will be licensed under the same license as this crate.
 
+### Support
+
+While I have been doing a lot of programming in Rust lately, I still do not consider myself knowledgeable to be of much help, so expect to be on your own.
+
+However, I will try my best to check things out, so feel free to either create a Github issue or email me at the address below:
+
+tonyhawk2100@gmail.com
