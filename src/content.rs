@@ -31,7 +31,7 @@ impl PartialEq for Content {
 }
 
 /**
- * A convenience building type, to make it easy to create content.
+ * A convenience building type to make it easy to create content.
  */
 #[derive(Default)]
 pub struct ContentBuilder {

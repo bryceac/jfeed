@@ -59,6 +59,7 @@ impl PartialEq for Item {
     }
 }
 
+/// A convenice type to make building items easy.
 #[derive(Default)]
 pub struct ItemBuilder {
     id: Option<String>,
