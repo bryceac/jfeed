@@ -13,7 +13,7 @@ pub struct Feed {
     pub version: Url,
     pub title: String,
     #[serde(rename ="home_page_url")]
-    pub homepage: Url,
+    pub home_page: Url,
     #[serde(rename = "feed_url")]
     pub url: Url,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -55,7 +55,7 @@ impl PartialEq for Feed {
     fn eq(&self, other: &Self) -> bool {
         self.version == other.version &&
         self.title == other.title &&
-        self.homepage == other.homepage &&
+        self.home_page == other.home_page &&
         self.url == other.url &&
         self.description == other.description &&
         self.comment == other.comment &&
@@ -75,7 +75,7 @@ impl PartialEq for Feed {
 pub struct FeedBuilder {
     version: Option<FeedVersion>,
     title: Option<String>,
-    homepage: Option<String>,
+    home_page: Option<String>,
     url: Option<String>,
     description: Option<String>,
     comment: Option<String>,
@@ -100,8 +100,8 @@ impl FeedBuilder {
         self
     }
 
-    pub fn set_home_page(&mut self, homepage: &str) -> &mut Self {
-        self.homepage = Some(homepage.to_owned());
+    pub fn set_home_page(&mut self, home_page: &str) -> &mut Self {
+        self.home_page = Some(home_page.to_owned());
         self
     }
 
@@ -169,7 +169,7 @@ impl FeedBuilder {
             return  Err(FeedBuildError::MissingTitle);
         }
 
-        if self.homepage.is_none() {
+        if self.home_page.is_none() {
             return Err(FeedBuildError::MissingHomePage);
         }
 
@@ -183,8 +183,8 @@ impl FeedBuilder {
 
         match Url::parse(&self.version.clone().unwrap().to_string()) {
             Ok(parsed_url) => {
-                if let Some(homepage) = self.homepage.clone() {
-                    if let Err(error) = Url::parse(&homepage) {
+                if let Some(home_page) = self.home_page.clone() {
+                    if let Err(error) = Url::parse(&home_page) {
                         return Err(FeedBuildError::URLError(error))
                     }
                 }
@@ -216,7 +216,7 @@ impl FeedBuilder {
                 Ok(Feed { 
                     version: parsed_url.clone(), 
                     title: self.title.clone().unwrap(), 
-                    homepage: Url::parse(&self.homepage.clone().unwrap()).unwrap(), 
+                    home_page: Url::parse(&self.home_page.clone().unwrap()).unwrap(), 
                     url: Url::parse(&self.url.clone().unwrap()).unwrap(), 
                     description: self.description.clone(), 
                     comment: self.comment.clone(), 
