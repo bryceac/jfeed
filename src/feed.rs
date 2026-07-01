@@ -3,6 +3,11 @@ use serde_json::Result as JSONResult;
 use url::Url;
 use crate::{FeedVersion, Author, Item, Hub, FeedBuildError};
 
+/**
+ * A feed as described at the address below.
+ * 
+ * https://www.jsonfeed.org/version/1.1/
+ */
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Feed {
     pub version: Url,
