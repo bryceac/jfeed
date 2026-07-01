@@ -63,6 +63,8 @@ impl fmt::Display for ContentBuildError {
 
 impl Error for ContentBuildError {}
 
+
+/// possible errors when building dates
 #[derive(Debug)]
 pub enum DatesBuildError {
     DateParseError(ChronoParseError),
@@ -80,6 +82,13 @@ impl fmt::Display for DatesBuildError {
 
 impl Error for DatesBuildError {}
 
+/**
+ * possible errors when building an Item.
+ * 
+ * While the JSON feed spec says that content and
+ * date are optional, their absence is considered an error
+ * in this crate.
+*/
 #[derive(Debug)]
 pub enum ItemBuildError {
     IDNotFound,
