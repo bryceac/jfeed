@@ -10,7 +10,7 @@
 
 ## Notes
 
-This crate is currently a <abbr title="work in progress">WIP</abbr>, and has not been fully implemented as intended.
+This crate has been tested on Rust 1.93 on macOS Tahoe. It is not known if it will work in earlier versions, but it should if the dependencies are backwards compatible and your Rust toolchain supports edition 2024.
 
 ### Questions
 
