@@ -498,7 +498,7 @@ mod tests {
         let mut builder = Feed::builder();
         builder.set_version(&FeedVersion::JSONFeed1_1);
         builder.set_title("News");
-        builder.set_homepage("https://example.com");
+        builder.set_home_page("https://example.com");
         builder.set_url("https://example.com/feed.json");
 
         assert!(builder.build().is_err())
@@ -507,7 +507,7 @@ mod tests {
     fn feed_building_fails_without_version() {
         let mut builder = Feed::builder();
         builder.set_title("News");
-        builder.set_homepage("https://example.com");
+        builder.set_home_page("https://example.com");
         builder.set_url("https://example.com/feed.json");
 
         let dates = Dates::builder()
@@ -539,7 +539,7 @@ mod tests {
         let mut builder = Feed::builder();
         builder.set_version(&FeedVersion::JSONFeed1_1);
         builder.set_title("News");
-        builder.set_homepage("https://example.com");
+        builder.set_home_page("https://example.com");
 
         let dates = Dates::builder()
         .set_published("2026-06-28T08:55:00Z")
@@ -600,7 +600,7 @@ mod tests {
     fn feed_building_fails_without_title() {
         let mut builder = Feed::builder();
         builder.set_version(&FeedVersion::JSONFeed1_1);
-        builder.set_homepage("https://example.com/");
+        builder.set_home_page("https://example.com/");
         builder.set_url("https://example.com/feed.json");
 
         let dates = Dates::builder()
@@ -632,7 +632,7 @@ mod tests {
         let mut builder = Feed::builder();
         builder.set_version(&FeedVersion::JSONFeed1_1);
         builder.set_title("News");
-        builder.set_homepage("https://example.com/");
+        builder.set_home_page("https://example.com/");
         builder.set_url("feed.json");
 
         let dates = Dates::builder()
@@ -664,7 +664,7 @@ mod tests {
         let mut builder = Feed::builder();
         builder.set_version(&FeedVersion::JSONFeed1_1);
         builder.set_title("News");
-        builder.set_homepage("https://example.com/");
+        builder.set_home_page("https://example.com/");
         builder.set_url("https://example.com/feed.json");
         builder.set_next_url("feed2.json");
 
@@ -697,7 +697,7 @@ mod tests {
         let mut builder = Feed::builder();
         builder.set_version(&FeedVersion::JSONFeed1_1);
         builder.set_title("News");
-        builder.set_homepage("https://example.com/");
+        builder.set_home_page("https://example.com/");
         builder.set_url("https://example.com/feed.json");
         builder.set_icon_url("hello.png");
 
@@ -730,7 +730,7 @@ mod tests {
         let mut builder = Feed::builder();
         builder.set_version(&FeedVersion::JSONFeed1_1);
         builder.set_title("News");
-        builder.set_homepage("https://example.com/");
+        builder.set_home_page("https://example.com/");
         builder.set_url("https://example.com/feed.json");
         builder.set_favicon_url("hello.png");
 
@@ -781,7 +781,7 @@ mod tests {
         let mut builder = Feed::builder();
         builder.set_version(&FeedVersion::JSONFeed1_1);
         builder.set_title("News");
-        builder.set_homepage("https://example.com/");
+        builder.set_home_page("https://example.com/");
         builder.set_url("https://example.com/feed.json");
 
         let dates = Dates::builder()
@@ -813,7 +813,7 @@ mod tests {
         let mut builder = Feed::builder();
         builder.set_version(&FeedVersion::JSONFeed1_1);
         builder.set_title("News");
-        builder.set_homepage("https://example.com/");
+        builder.set_home_page("https://example.com/");
         builder.set_url("https://example.com/feed.json");
 
         let dates = Dates::builder()
@@ -847,7 +847,7 @@ mod tests {
         let mut builder = Feed::builder();
         builder.set_version(&FeedVersion::JSONFeed1_1);
         builder.set_title("News");
-        builder.set_homepage("https://example.com/");
+        builder.set_home_page("https://example.com/");
         builder.set_url("https://example.com/feed.json");
 
         let dates = Dates::builder()

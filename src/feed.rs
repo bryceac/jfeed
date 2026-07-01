@@ -100,7 +100,7 @@ impl FeedBuilder {
         self
     }
 
-    pub fn set_homepage(&mut self, homepage: &str) -> &mut Self {
+    pub fn set_home_page(&mut self, homepage: &str) -> &mut Self {
         self.homepage = Some(homepage.to_owned());
         self
     }
