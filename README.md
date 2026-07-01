@@ -55,6 +55,10 @@ and, to fit that purpose, things like dates and contentmare important.</p>
 </li>
 </ol>
 
+### Creating A Feed
+
+to create a feed, you would do something like this:
+
 ### Contributing
 
 If you would like to help make this crate better, feel free to fork this repo and make a pull request.
