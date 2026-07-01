@@ -114,6 +114,7 @@ impl fmt::Display for ItemBuildError {
 
 impl Error for ItemBuildError {}
 
+/// possible errors when creating a hub.
 #[derive(Debug)]
 pub enum HubError {
     NoType,
@@ -135,6 +136,7 @@ impl fmt::Display for HubError {
 
 impl Error for HubError {}
 
+/// Possible errors that can occur when building a feed.
 #[derive(Debug)]
 pub enum FeedBuildError {
     MissingVersion,
