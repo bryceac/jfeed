@@ -160,6 +160,15 @@ impl FeedBuilder {
         self
     }
 
+    /**
+     * build a feed.
+     * 
+     * This fails based up the recommendations made by the spec
+     * for feeds that are publicly accessible in addition to keys that
+     * are actually required.
+     * 
+     * Also, errors will be thrown if any and all URLs cannot be parsed.
+     */
     pub fn build(&self) -> Result<Feed, FeedBuildError> {
         if self.version.is_none()  {
             return Err(FeedBuildError::MissingVersion);
