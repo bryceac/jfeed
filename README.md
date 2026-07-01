@@ -57,7 +57,7 @@ and, to fit that purpose, things like dates and contentmare important.</p>
 
 ### Contributing
 
-If you would like to help get this project running, especially by implementing the stuff in the to do list, feel free to fork this project and make a pull request.
+If you would like to help make this crate better, feel free to fork this repo and make a pull request.
 
 Please be aware that your contributions will be licensed under the same license as this crate.
 
