@@ -12,13 +12,6 @@
 
 This crate is currently a <abbr title="work in progress">WIP</abbr>, and has not been fully implemented as intended.
 
-### To Do
-
-<ul>
-<li>Write tests for feed generation.</li>
-<li>Write tests regarding feed parsing, to make sure things are generated as expected.</li>
-</ul>
-
 ### Questions
 
 <ol>
