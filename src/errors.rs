@@ -47,6 +47,7 @@ impl fmt::Display for AuthorBuildError {
 
 impl Error for AuthorBuildError {}
 
+/// possible errors that can occur when building content.
 #[derive(Debug)]
 pub enum ContentBuildError {
     MissingContent
