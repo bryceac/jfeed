@@ -3,6 +3,11 @@ use std::collections::HashMap;
 
 use crate::ContentBuildError;
 
+/**
+ * Item content as described at the below address.
+ * 
+ * https://www.jsonfeed.org/version/1.1/index.html#items.
+ */
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(try_from = "ContentDes")]
 pub struct Content {
@@ -25,6 +30,9 @@ impl PartialEq for Content {
     }
 }
 
+/**
+ * A convenience building type, to make it easy to create content.
+ */
 #[derive(Default)]
 pub struct ContentBuilder {
     html: Option<String>,
@@ -42,6 +50,14 @@ impl ContentBuilder {
         self
     }
 
+    /**
+     * build content.
+     * 
+     * While this does not satisfy the check 
+     * to make sure that HTML content is only in the HTML field,
+     * as specified by the JSON feed spec, it does ensure that
+     * at least one field is provided.
+     */
     pub fn build(&self) -> Result<Content, ContentBuildError> {
         match (self.html.clone(), self.text.clone()) {
             (Some(html), Some(text)) => Ok(Content {
