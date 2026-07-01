@@ -77,6 +77,9 @@ impl ContentBuilder {
     }
 }
 
+/**
+ * Deserializing struct that makes sure content is present.
+ */
 #[derive(Deserialize)]
 #[serde(transparent)]
 struct ContentDes(HashMap<String, String>);
