@@ -2,6 +2,11 @@ use serde::{ Serialize, Deserialize };
 use url::Url;
 use crate::{ Author, Content, Dates, Attachment, ItemBuildError };
 
+/**
+ * A feed item as described at the address below.
+ * 
+ * https://www.jsonfeed.org/version/1.1/index.html#items
+ */
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Item {
     id: String,
