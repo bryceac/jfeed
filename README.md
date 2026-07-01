@@ -18,8 +18,7 @@ This crate has been tested on Rust 1.93 on macOS Tahoe. It is not known if it wi
 <li>
 <dt style="font-weight:bold">Why create this when there are other crates that can be used?</dt>
 <dd>
-<p>I would have very much liked to try out the ones listed <a href="https://www.jsonfeed.org/code/">here</a>, but they either appeared to be unmaintained, which
-is not that surprising, since the spec hardly changes, only parses JSON feeds, or uses rather ugly code that reminds me of old Java code.</p>
+<p>I would have very much liked to try out the ones listed <a href="https://www.jsonfeed.org/code/">here</a>, but they either appeared to be unmaintained, which is not that surprising, since the spec hardly changes, only parses JSON feeds, or uses rather ugly code that reminds me of old Java code.</p>
 <p>While I cannot promise my code is any prettier, it will at least do what I am writing this do to, which is create JSON feeds.</p>
 </dd>
 </li>
