@@ -143,6 +143,24 @@ impl ItemBuilder {
         self
     }
 
+    /**
+     * build an item.
+     * 
+     * While the spec itself is pretty loose here,
+     * some things have been made required, either because
+     * the spec recommends their presence, or I find them important.
+     * 
+     * For example, 
+     * both the publication date and modification dates are optional,
+     * but because I made this crate 
+     * for use in another project I am working on, 
+     * involving a blog/newsfeed component, I find it important to
+     * have at least one of them.
+     * 
+     * If you hit points like these, you will receive an error.
+     * 
+     * Errors will also arise if you provide a URL that cannot be parsed.
+     */
     pub fn build(&self) -> Result<Item, ItemBuildError> {
         if self.id.is_none() {
             return Err(ItemBuildError::IDNotFound);
