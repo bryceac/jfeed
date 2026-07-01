@@ -65,6 +65,57 @@ and, to fit that purpose, things like dates and contentmare important.</p>
 
 to create a feed, you would do something like this:
 
+<pre>
+let mut builder = Feed::builder();
+builder.set_version(&FeedVersion::JSONFeed1_1);
+builder.set_title("News");
+builder.set_home_page("https://example.com/");
+builder.set_url("https://example.com/feed.json");
+
+let dates = Dates::builder()
+.set_published("2026-06-28T08:55:00Z")
+.build().unwrap();
+
+let author = Author::builder()
+.set_name("Jerry")
+.build().unwrap();
+
+let content = Content::builder()
+.set_text("Hello, World!")
+.build().unwrap();
+
+let item = Item::builder()
+.set_id("https://example.com/hello_world.html")
+.set_url("https://example.com/hello_world.html")
+.set_title("Hello, World!")
+.set_dates(&dates)
+.add_author(&author)
+.set_content(&content)
+.build().unwrap();
+
+builder.add_item(&item);
+
+let feed = builder.build().unwrap();
+</pre>
+
+With the exception of Hubs and attachments, 
+this is how everything need for a feed would be produced.
+
+Like what you see above, 
+attachments can be created with a builder pattern, 
+and would be created like this:
+
+<pre>
+let mut attachment = Attachment::builder()
+.set_url("https://example.com/hello.mp4")
+.set_mimetype("video/mp4")
+.set_title("Hello, World!")
+.build();
+</pre>
+
+Any type with data that has optional components will have a builder pattern,
+while those, like Hubs, that require everything does not have a builder pattern.
+
 ### Contributing
 
 If you would like to help make this crate better, feel free to fork this repo and make a pull request.
