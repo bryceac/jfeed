@@ -70,6 +70,7 @@ impl PartialEq for Feed {
     }
 }
 
+/// A Convenice building type to make building feeds easier.
 #[derive(Default)]
 pub struct FeedBuilder {
     version: Option<FeedVersion>,
