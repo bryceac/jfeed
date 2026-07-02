@@ -11,7 +11,7 @@ use crate::{ Author, Content, Dates, Attachment, ItemBuildError };
 pub struct Item {
     id: String,
     #[serde(with = "http_serde::uri")]
-    url: Url,
+    url: Uri,
     #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
     external_url: Option<Uri>,
     #[serde(skip_serializing_if = "Option::is_none")]
