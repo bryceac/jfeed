@@ -1,5 +1,6 @@
 use std::{ error::Error, fmt };
 use chrono::format::ParseError as ChronoParseError;
+use http::uri::InvalidUri;
 
 /**
  * The possible errors that can occur when
@@ -10,7 +11,7 @@ pub enum AttachmentBuildError {
     URLNotFound,
     MimetypeNotFound,
     URLAndMimetypeNotFound,
-    URLParseError(URLParseError)
+    URLParseError(InvalidUri)
 }
 
 impl fmt::Display for AttachmentBuildError {

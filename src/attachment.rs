@@ -91,7 +91,7 @@ impl AttachmentBuilder {
             (None, Some(_)) => Err(AttachmentBuildError::URLNotFound),
             (Some(_), None) => Err(AttachmentBuildError::MimetypeNotFound),
             (None, None) => Err(AttachmentBuildError::URLAndMimetypeNotFound),
-            (Some(url), Some(mime_type)) => /* match Url::parse(&url) {
+            (Some(url), Some(mime_type)) => match url.parse::<Uri>() {
                 Ok(parsed_url) => Ok(Attachment {
                     url: parsed_url,
                     mime_type,
@@ -102,18 +102,9 @@ impl AttachmentBuilder {
                     },
                     size: self.size,
                     duration: self.duration
-                }) */ Ok(Attachment {
-                    url: Uri::from_static(&url),
-                    mime_type,
-                    title: if let Some(title) = self.title.clone() {
-                        title
-                    } else {
-                        String::default()
-                    },
-                    size: self.size,
-                    duration: self.duration
                 }),
-                Err(error) => Err(AttachmentBuildError::URLParseError(error))
+                Err(parse_error) => Err(todo!())
+            }
         }
     }
 }
