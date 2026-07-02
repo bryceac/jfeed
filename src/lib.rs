@@ -667,7 +667,7 @@ mod tests {
         builder.set_title("News");
         builder.set_home_page("https://example.com/");
         builder.set_url("https://example.com/feed.json");
-        builder.set_next_url("feed2.json");
+        builder.set_next_url("?");
 
         let dates = Dates::builder()
         .set_published("2026-06-28T08:55:00Z")
@@ -837,7 +837,7 @@ mod tests {
         .add_author(&author)
         .set_content(&content)
         .build().unwrap();
-    
+
         builder.add_item(&item);
         let feed = builder.build().unwrap();
 
