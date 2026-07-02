@@ -1,7 +1,7 @@
 use serde::{ Serialize, Deserialize };
 use serde_json::Result as JSONResult;
 use http::uri::Uri;
-use crate::{FeedVersion, Author, Item, Hub, FeedBuildError};
+use crate::{FeedVersion, Author, Item, Hub, FeedBuildError, http_opt_uri };
 
 /**
  * A feed as described at the address below.
@@ -10,22 +10,23 @@ use crate::{FeedVersion, Author, Item, Hub, FeedBuildError};
  */
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Feed {
-    pub version: Url,
+    #[serde(with = "http_serde::uri")]
+    pub version: Uri,
     pub title: String,
-    #[serde(rename ="home_page_url")]
-    pub home_page: Url,
-    #[serde(rename = "feed_url")]
-    pub url: Url,
+    #[serde(rename ="home_page_url", with = "http_serde::uri")]
+    pub home_page: Uri,
+    #[serde(rename = "feed_url", with = "http_serde::uri")]
+    pub url: Uri,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
     #[serde(rename = "user_comment", skip_serializing_if = "Option::is_none")]
     pub comment: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub next_url: Option<Url>,
-    #[serde(rename = "icon", skip_serializing_if = "Option::is_none")]
-    pub icon_url: Option<Url>,
-    #[serde(rename = "favicon", skip_serializing_if = "Option::is_none")]
-    pub favicon_url: Option<Url>,
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
+    pub next_url: Option<Uri>,
+    #[serde(rename = "icon", skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
+    pub icon_url: Option<Uri>,
+    #[serde(rename = "favicon", skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
+    pub favicon_url: Option<Uri>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub authors: Vec<Author>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -190,34 +191,34 @@ impl FeedBuilder {
             return Err(FeedBuildError::MissItems);
         }
 
-        match Url::parse(&self.version.clone().unwrap().to_string()) {
+        match self.version.clone().unwrap().to_string().parse::<Uri>() {
             Ok(parsed_url) => {
                 if let Some(home_page) = self.home_page.clone() {
-                    if let Err(error) = Url::parse(&home_page) {
+                    if let Err(error) = home_page.parse::<Uri>() {
                         return Err(FeedBuildError::URLError(error))
                     }
                 }
 
                 if let Some(feed_url) = self.url.clone() {
-                    if let Err(error) = Url::parse(&feed_url) {
+                    if let Err(error) = feed_url.parse::<Uri>() {
                         return Err(FeedBuildError::URLError(error))
                     }
                 }
 
                 if let Some(next_url) = self.next_url.clone() {
-                    if let Err(error) = Url::parse(&next_url) {
+                    if let Err(error) = next_url.parse::<Uri>() {
                         return Err(FeedBuildError::URLError(error))
                     }
                 }
 
                 if let Some(icon_url) = self.icon_url.clone() {
-                    if let Err(error) = Url::parse(&icon_url) {
+                    if let Err(error) = icon_url.parse::<Uri>() {
                         return Err(FeedBuildError::URLError(error))
                     }
                 }
 
                 if let Some(favicon_url) = self.favicon_url.clone() {
-                    if let Err(error) = Url::parse(&favicon_url) {
+                    if let Err(error) = favicon_url.parse::<Uri>() {
                         return Err(FeedBuildError::URLError(error))
                     }
                 }
@@ -225,22 +226,22 @@ impl FeedBuilder {
                 Ok(Feed { 
                     version: parsed_url.clone(), 
                     title: self.title.clone().unwrap(), 
-                    home_page: Url::parse(&self.home_page.clone().unwrap()).unwrap(), 
-                    url: Url::parse(&self.url.clone().unwrap()).unwrap(), 
+                    home_page: self.home_page.clone().unwrap().parse::<Uri>().unwrap(), 
+                    url: self.url.clone().unwrap().parse::<Uri>().unwrap(), 
                     description: self.description.clone(), 
                     comment: self.comment.clone(), 
                     next_url: if let Some(next_url) = self.next_url.clone() {
-                        Some(Url::parse(&next_url).unwrap())
+                        Some(next_url.parse::<Uri>().unwrap())
                     } else {
                         None
                     }, 
                     icon_url: if let Some(icon_url) = self.icon_url.clone() {
-                        Some(Url::parse(&icon_url).unwrap())
+                        Some(icon_url.parse::<Uri>().unwrap())
                     } else {
                         None
                     }, 
                     favicon_url: if let Some(favicon_url) = self.favicon_url.clone() {
-                        Some(Url::parse(&favicon_url).unwrap())
+                        Some(favicon_url.parse::<Uri>().unwrap())
                     } else {
                         None
                     }, 
