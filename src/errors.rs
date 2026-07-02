@@ -11,7 +11,7 @@ pub enum AttachmentBuildError {
     URLNotFound,
     MimetypeNotFound,
     URLAndMimetypeNotFound,
-    InvalidUri(InvalidUri)
+    URLParseError(InvalidUri)
 }
 
 impl fmt::Display for AttachmentBuildError {
@@ -20,7 +20,7 @@ impl fmt::Display for AttachmentBuildError {
             Self::MimetypeNotFound => write!(f, "mimetype must be specified."),
             Self::URLNotFound => write!(f, "URL must be specified."),
             Self::URLAndMimetypeNotFound => write!(f, "Both URL and mimetype must be specified"),
-            Self::InvalidUri(parse_error) => write!(f, "{}", parse_error)
+            Self::URLParseError(parse_error) => write!(f, "{}", parse_error)
         }
     }
 }
@@ -33,14 +33,14 @@ impl Error for AttachmentBuildError {}
 #[derive(Debug)]
 pub enum AuthorBuildError {
     MissingData,
-    InvalidUri(InvalidUri)
+    URLParseError(InvalidUri)
 }
 
 impl fmt::Display for AuthorBuildError {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
         match self {
             Self::MissingData => write!(f, "No data found. Please provide either a name, URL, or avatar URL."),
-            Self::InvalidUri(parse_error) => write!(f, "{}", parse_error)
+            Self::URLParseError(parse_error) => write!(f, "{}", parse_error)
         }
     }
 }
