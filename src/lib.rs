@@ -66,7 +66,7 @@ mod tests {
     #[test]
     fn attachment_build_fails_when_url_cannot_be_parsed() {
         let mut attachment = Attachment::builder();
-        attachment.set_url("mp4");
+        attachment.set_url("?");
         attachment.set_mimetype("video/mp4");
         attachment.set_title("Hello, World!");
 
@@ -92,13 +92,13 @@ mod tests {
     #[test]
     fn author_building_fails_with_invalid_url() {
         assert!(Author::builder()
-        .set_url("mp4").build().is_err())
+        .set_url("?").build().is_err())
     }
 
     #[test]
     fn author_building_fails_with_invalid_avatar() {
         assert!(Author::builder()
-        .set_avatar_url("mp4")
+        .set_avatar_url("?")
         .build().is_err())
     }
 
@@ -106,7 +106,7 @@ mod tests {
     fn author_building_fails_with_name_but_invalid_url() {
         assert!(Author::builder()
         .set_name("Jerry")
-        .set_url("mp4")
+        .set_url("?")
         .build().is_err())
     }
 
@@ -114,7 +114,7 @@ mod tests {
     fn author_building_fails_with_name_but_invalid_avatar() {
         assert!(Author::builder()
         .set_name("Jerry")
-        .set_avatar_url("mp4")
+        .set_avatar_url("?")
         .build().is_err())
     }
 
@@ -122,8 +122,8 @@ mod tests {
     fn author_building_fails_with_name_but_invalid_urls() {
         assert!(Author::builder()
         .set_name("Jerry")
-        .set_url("html")
-        .set_avatar_url("mp4")
+        .set_url("?")
+        .set_avatar_url("?")
         .build().is_err())
     }
 
@@ -373,8 +373,8 @@ mod tests {
         .build().unwrap();
 
         let mut builder = Item::builder();
-        builder.set_id("hello_world.html");
-        builder.set_url("hello_world.html");
+        builder.set_id("?");
+        builder.set_url("?");
         builder.set_title("Hello, World!");
         builder.set_dates(&dates);
         builder.add_author(&author);
@@ -399,7 +399,7 @@ mod tests {
         let mut builder = Item::builder();
         builder.set_id("https://example.com/hello_world.html");
         builder.set_url("https://example.com/hello_world.html");
-        builder.set_external_url("image.png");
+        builder.set_external_url("?");
         builder.set_title("Hello, World!");
         builder.set_dates(&dates);
         builder.add_author(&author);
@@ -427,7 +427,7 @@ mod tests {
         builder.set_title("Hello, World!");
         builder.set_dates(&dates);
         builder.add_author(&author);
-        builder.set_image_url("image.png");
+        builder.set_image_url("?");
         builder.set_content(&content);
 
         assert!(builder.build().is_err())
@@ -450,7 +450,7 @@ mod tests {
         builder.set_id("https://example.com/hello_world.html");
         builder.set_url("https://example.com/hello_world.html");
         builder.set_title("Hello, World!");
-        builder.set_banner_url("image.png");
+        builder.set_banner_url("?");
         builder.set_dates(&dates);
         builder.add_author(&author);
         builder.set_content(&content);
@@ -479,7 +479,7 @@ mod tests {
     }
 
     fn hub_initialization_fails_with_invalid_url() {
-        assert!(Hub::from("Hello", "html").is_err())
+        assert!(Hub::from("Hello", "?").is_err())
     }
 
     #[test]
@@ -634,7 +634,7 @@ mod tests {
         builder.set_version(&FeedVersion::JSONFeed1_1);
         builder.set_title("News");
         builder.set_home_page("https://example.com/");
-        builder.set_url("feed.json");
+        builder.set_url("?");
 
         let dates = Dates::builder()
         .set_published("2026-06-28T08:55:00Z")
@@ -700,7 +700,7 @@ mod tests {
         builder.set_title("News");
         builder.set_home_page("https://example.com/");
         builder.set_url("https://example.com/feed.json");
-        builder.set_icon_url("hello.png");
+        builder.set_icon_url("?");
 
         let dates = Dates::builder()
         .set_published("2026-06-28T08:55:00Z")
@@ -733,7 +733,7 @@ mod tests {
         builder.set_title("News");
         builder.set_home_page("https://example.com/");
         builder.set_url("https://example.com/feed.json");
-        builder.set_favicon_url("hello.png");
+        builder.set_favicon_url("?");
 
         let dates = Dates::builder()
         .set_published("2026-06-28T08:55:00Z")
