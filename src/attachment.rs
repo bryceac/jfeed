@@ -103,7 +103,7 @@ impl AttachmentBuilder {
                     size: self.size,
                     duration: self.duration
                 }),
-                Err(parse_error) => Err(todo!())
+                Err(parse_error) => Err(AttachmentBuildError::URLParseError(parse_error))
             }
         }
     }
