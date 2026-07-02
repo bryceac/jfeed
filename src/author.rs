@@ -105,19 +105,19 @@ impl AuthorBuilder {
         match (self.name.clone(), self.url.clone(), self.avatar_url.clone()) {
             (None, None, None) => Err(AuthorBuildError::MissingData),
             (Some(name), Some(url), Some(avatar_url)) => {
-                if let Err(parse_error) = Url::parse(&url) {
+                if let Err(parse_error) = url.parse::<Uri>() {
                     Err(AuthorBuildError::URLParseError(parse_error))
-                } else if let Err(parse_error) = Url::parse(&avatar_url) {
+                } else if let Err(parse_error) = avatar_url.parse::<Uri>() {
                     Err(AuthorBuildError::URLParseError(parse_error))
                 } else {
                     Ok(Author {
                         name: Some(name),
-                        url: Some(Url::parse(&url).unwrap()),
-                        avatar_url: Some(Url::parse(&avatar_url).unwrap()),
+                        url: Some(url.parse::<Uri>().unwrap()),
+                        avatar_url: Some(avatar_url.parse::<Uri>().unwrap()),
                     })
                 }
             },
-            (Some(name), Some(url), None) => match Url::parse(&url) {
+            (Some(name), Some(url), None) => match url.parse::<Uri>() {
                 Ok(author_url) => Ok(Author {
                     name: Some(name),
                     url: Some(author_url),
@@ -125,7 +125,7 @@ impl AuthorBuilder {
                 }),
                 Err(parse_error) => Err(AuthorBuildError::URLParseError(parse_error))
             },
-            (Some(name), None, Some(avatar_url)) => match Url::parse(&avatar_url) {
+            (Some(name), None, Some(avatar_url)) => match avatar_url.parse::<Uri>() {
                 Ok(avatar_url) => Ok(Author {
                     name: Some(name),
                     url: None,
@@ -133,15 +133,15 @@ impl AuthorBuilder {
                 }),
                 Err(parse_error) => Err(AuthorBuildError::URLParseError(parse_error))
             },
-            (None, Some(url), Some(avatar_url)) => if let Err(parse_error) = Url::parse(&url) {
+            (None, Some(url), Some(avatar_url)) => if let Err(parse_error) = url.parse::<Uri>() {
                 Err(AuthorBuildError::URLParseError(parse_error))
-            } else if let Err(parse_error) = Url::parse(&avatar_url) {
+            } else if let Err(parse_error) = avatar_url.parse::<Uri>() {
                 Err(AuthorBuildError::URLParseError(parse_error))
             } else {
                 Ok(Author {
                     name: None,
-                    url: Some(Url::parse(&url).unwrap()),
-                    avatar_url: Some(Url::parse(&avatar_url).unwrap())
+                    url: Some(url.parse::<Uri>().unwrap()),
+                    avatar_url: Some(avatar_url.parse::<Uri>().unwrap())
                 })
             },
             (Some(name), None, None) => Ok(Author { 
@@ -149,7 +149,7 @@ impl AuthorBuilder {
                 url: None, 
                 avatar_url: None 
             }),
-            (None, Some(url), None) => match Url::parse(&url) {
+            (None, Some(url), None) => match url.parse::<Uri>() {
                 Ok(author_url) => Ok(Author { 
                     name: None, 
                     url: Some(author_url), 
@@ -157,7 +157,7 @@ impl AuthorBuilder {
                 }),
                 Err(parse_error) => Err(AuthorBuildError::URLParseError(parse_error))
             },
-            (None, None, Some(avatar_url)) => match Url::parse(&avatar_url) {
+            (None, None, Some(avatar_url)) => match avatar_url.parse::<Uri>() {
                 Ok(avatar_url) => Ok(Author { 
                     name: None, 
                     url: None, 
