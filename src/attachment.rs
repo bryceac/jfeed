@@ -1,5 +1,5 @@
 use serde::{ Serialize, Deserialize };
-use url::Url;
+use http::uri::Uri;
 
 use crate::AttachmentBuildError;
 
@@ -14,7 +14,7 @@ use crate::AttachmentBuildError;
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Attachment {
     /// The attachment's URL
-    pub url: Url,
+    pub url: Uri,
     /// The mimetype for the attached item
     pub mime_type: String,
     /// Title title for the attached item
