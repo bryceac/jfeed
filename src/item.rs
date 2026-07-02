@@ -10,19 +10,20 @@ use crate::{ Author, Content, Dates, Attachment, ItemBuildError };
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Item {
     id: String,
+    #[serde(with = "http_serde::uri")]
     url: Url,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    external_url: Option<Url>,
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
+    external_url: Option<Uri>,
     #[serde(skip_serializing_if = "Option::is_none")]
     title: Option<String>,
     #[serde(flatten)]
     content: Content,
     #[serde(skip_serializing_if = "Option::is_none")]
     summary: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    image_url: Option<Url>,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    banner_url: Option<Url>,
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
+    image_url: Option<Uri>,
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
+    banner_url: Option<Uri>,
     #[serde(flatten)]
     dates: Dates,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -182,22 +183,22 @@ impl ItemBuilder {
             return Err(ItemBuildError::NoDate);
         }
 
-        match Url::parse(&self.url.clone().unwrap()) {
+        match self.url.clone().parse::<Uri>() {
             Ok(parsed_url) => {
                 if let Some(external_url) = self.external_url.clone() {
-                    if let Err(parse_error) = Url::parse(&external_url) {
+                    if let Err(parse_error) = external_url.parse::<Uri>() {
                         return Err(ItemBuildError::MiscError(parse_error));
                     }
                 }
 
                 if let Some(image_url) = self.image_url.clone() {
-                    if let Err(parse_error) = Url::parse(&image_url) {
+                    if let Err(parse_error) = image_url.parse::<Uri>() {
                         return Err(ItemBuildError::MiscError(parse_error));
                     }
                 }
 
                 if let Some(banner_url) = self.banner_url.clone() {
-                    if let Err(parse_error) = Url::parse(&banner_url) {
+                    if let Err(parse_error) = banner_url.parse::<Uri>() {
                         return Err(ItemBuildError::MiscError(parse_error));
                     }
                 }
@@ -206,7 +207,7 @@ impl ItemBuilder {
                     id: self.id.clone().unwrap(),
                     url: parsed_url.clone(),
                     external_url: if let Some(external_url) = self.external_url.clone() {
-                        Some(Url::parse(&external_url).unwrap())
+                        Some(external_url.parse::<Uri>().unwrap())
                     } else {
                         None
                     },
@@ -214,20 +215,12 @@ impl ItemBuilder {
                     content: self.content.clone().unwrap(),
                     summary: self.summary.clone(),
                     image_url: if let Some(image_url) = self.image_url.clone() {
-                        if let Ok(parsed_image_url) = Url::parse(&image_url) {
-                            Some(parsed_image_url)
-                        } else {
-                            None
-                        }
+                        Some(image_url.parse::<Uri>().unwrap())
                     } else {
                         None
                     },
                     banner_url: if let Some(banner_url) = self.banner_url.clone() {
-                        if let Ok(parsed_banner_url) = Url::parse(&banner_url) {
-                            Some(parsed_banner_url)
-                        } else {
-                            None
-                        }
+                        Some(banner_url.parse::<Uri>().unwrap())
                     } else {
                         None
                     },
