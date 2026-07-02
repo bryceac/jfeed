@@ -12,7 +12,7 @@ pub struct Item {
     pub id: String,
     #[serde(with = "http_serde::uri")]
     pub url: Uri,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
     pub external_url: Option<Uri>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub title: Option<String>,
