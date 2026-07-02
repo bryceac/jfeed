@@ -96,6 +96,7 @@ pub enum ItemBuildError {
     NoAuthorsFound,
     NoContent,
     NoDate,
+    MissingData,
     MiscError(InvalidUri)
 }
 
@@ -107,6 +108,7 @@ impl fmt::Display for ItemBuildError {
             Self::NoAuthorsFound => write!(f, "Item must have at least one author."),
             Self::NoContent => write!(f, "Please provide content in plain text or HTML."),
             Self::NoDate => write!(f, "Please provide a publication and/or modification date."),
+            Self::MissingData => write!(f, "No Data found."),
             Self::MiscError(parse_error) => write!(f, "{}", parse_error)
         }
     }
