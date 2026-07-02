@@ -12,7 +12,8 @@ use crate::HubError;
 pub struct Hub {
     #[serde(rename = "type")]
     pub hub_type: String,
-    pub url: Url
+    #[serde(with = "http_serde::uri")]
+    pub url: Uri
 }
 
 impl Hub {
@@ -29,7 +30,7 @@ impl Hub {
             (t, u) if t.is_empty() && u.is_empty() => Err(HubError::MissingAll),
             (t, u) if !t.is_empty() && u.is_empty() => Err(HubError::NoURL),
             (t, u) if t.is_empty() && !u.is_empty() => Err(HubError::NoType),
-            _ => match Url::parse(url) {
+            _ => match url.parse::<Uri>() {
                 Ok(parsed_url) => Ok(Hub {
                     hub_type: hub_type.to_owned(),
                     url: parsed_url
