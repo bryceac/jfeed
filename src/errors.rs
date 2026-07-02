@@ -1,5 +1,5 @@
 use std::{ error::Error, fmt };
-use url::ParseError as URLParseError;
+use http::uri::InvalidUri;
 use chrono::format::ParseError as ChronoParseError;
 
 /**
@@ -11,7 +11,7 @@ pub enum AttachmentBuildError {
     URLNotFound,
     MimetypeNotFound,
     URLAndMimetypeNotFound,
-    URLParseError(URLParseError)
+    InvalidUri(InvalidUri)
 }
 
 impl fmt::Display for AttachmentBuildError {
@@ -20,7 +20,7 @@ impl fmt::Display for AttachmentBuildError {
             Self::MimetypeNotFound => write!(f, "mimetype must be specified."),
             Self::URLNotFound => write!(f, "URL must be specified."),
             Self::URLAndMimetypeNotFound => write!(f, "Both URL and mimetype must be specified"),
-            Self::URLParseError(parse_error) => write!(f, "{}", parse_error)
+            Self::InvalidUri(parse_error) => write!(f, "{}", parse_error)
         }
     }
 }
@@ -33,14 +33,14 @@ impl Error for AttachmentBuildError {}
 #[derive(Debug)]
 pub enum AuthorBuildError {
     MissingData,
-    URLParseError(URLParseError)
+    InvalidUri(InvalidUri)
 }
 
 impl fmt::Display for AuthorBuildError {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
         match self {
             Self::MissingData => write!(f, "No data found. Please provide either a name, URL, or avatar URL."),
-            Self::URLParseError(parse_error) => write!(f, "{}", parse_error)
+            Self::InvalidUri(parse_error) => write!(f, "{}", parse_error)
         }
     }
 }
@@ -96,7 +96,7 @@ pub enum ItemBuildError {
     NoAuthorsFound,
     NoContent,
     NoDate,
-    MiscError(URLParseError)
+    MiscError(InvalidUri)
 }
 
 impl fmt::Display for ItemBuildError {
@@ -120,7 +120,7 @@ pub enum HubError {
     NoType,
     NoURL,
     MissingAll,
-    URLError(URLParseError)
+    URLError(InvalidUri)
 }
 
 impl fmt::Display for HubError {
@@ -144,7 +144,7 @@ pub enum FeedBuildError {
     MissingHomePage,
     MissingURL,
     MissItems,
-    URLError(URLParseError)
+    URLError(InvalidUri)
 }
 
 impl fmt::Display for FeedBuildError {
