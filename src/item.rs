@@ -1,6 +1,6 @@
 use serde::{ Serialize, Deserialize };
 use http::uri::Uri;
-use crate::{ Author, Content, Dates, Attachment, ItemBuildError };
+use crate::{ Author, Content, Dates, Attachment, ItemBuildError, http_opt_uri };
 
 /**
  * A feed item as described at the address below.
@@ -12,7 +12,7 @@ pub struct Item {
     id: String,
     #[serde(with = "http_serde::uri")]
     url: Uri,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
     external_url: Option<Uri>,
     #[serde(skip_serializing_if = "Option::is_none")]
     title: Option<String>,
@@ -20,9 +20,9 @@ pub struct Item {
     content: Content,
     #[serde(skip_serializing_if = "Option::is_none")]
     summary: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
     image_url: Option<Uri>,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
     banner_url: Option<Uri>,
     #[serde(flatten)]
     dates: Dates,
@@ -183,7 +183,7 @@ impl ItemBuilder {
             return Err(ItemBuildError::NoDate);
         }
 
-        match self.url.clone().parse::<Uri>() {
+        match self.url.clone().unwrap().parse::<Uri>() {
             Ok(parsed_url) => {
                 if let Some(external_url) = self.external_url.clone() {
                     if let Err(parse_error) = external_url.parse::<Uri>() {
