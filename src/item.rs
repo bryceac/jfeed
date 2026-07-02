@@ -9,31 +9,31 @@ use crate::{ Author, Content, Dates, Attachment, ItemBuildError, http_opt_uri };
  */
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Item {
-    id: String,
+    pub id: String,
     #[serde(with = "http_serde::uri")]
-    url: Uri,
+    pub url: Uri,
     #[serde(skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
-    external_url: Option<Uri>,
+    pub external_url: Option<Uri>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    title: Option<String>,
+    pub title: Option<String>,
     #[serde(flatten)]
-    content: Content,
+    pub content: Content,
     #[serde(skip_serializing_if = "Option::is_none")]
-    summary: Option<String>,
+    pub summary: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
-    image_url: Option<Uri>,
+    pub image_url: Option<Uri>,
     #[serde(skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
-    banner_url: Option<Uri>,
+    pub banner_url: Option<Uri>,
     #[serde(flatten)]
-    dates: Dates,
+    pub dates: Dates,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    authors: Vec<Author>,
+    pub authors: Vec<Author>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    tags: Vec<String>,
+    pub tags: Vec<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    language: Option<String>,
+    pub language: Option<String>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    attachments: Vec<Attachment>
+    pub attachments: Vec<Attachment>
 }
 
 impl Item {
