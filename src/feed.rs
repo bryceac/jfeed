@@ -1,7 +1,7 @@
 use serde::{ Serialize, Deserialize };
 use serde_json::Result as JSONResult;
 use http::uri::Uri;
-use crate::{FeedVersion, Author, Item, Hub, FeedBuildError, http_opt_uri };
+use crate::{FeedVersion, Author, Item, Hub, FeedBuildError };
 
 /**
  * A feed as described at the address below.
@@ -21,11 +21,11 @@ pub struct Feed {
     pub description: Option<String>,
     #[serde(rename = "user_comment", skip_serializing_if = "Option::is_none")]
     pub comment: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
     pub next_url: Option<Uri>,
-    #[serde(rename = "icon", skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
+    #[serde(rename = "icon", skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
     pub icon_url: Option<Uri>,
-    #[serde(rename = "favicon", skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
+    #[serde(rename = "favicon", skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
     pub favicon_url: Option<Uri>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub authors: Vec<Author>,

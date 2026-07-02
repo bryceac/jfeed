@@ -1,6 +1,6 @@
 use serde::{ Serialize, Deserialize };
 use http::uri::Uri;
-use crate::{ Author, Content, Dates, Attachment, ItemBuildError, http_opt_uri };
+use crate::{ Author, Content, Dates, Attachment, ItemBuildError };
 
 /**
  * A feed item as described at the address below.
@@ -20,9 +20,9 @@ pub struct Item {
     pub content: Content,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub summary: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
     pub image_url: Option<Uri>,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
     pub banner_url: Option<Uri>,
     #[serde(flatten)]
     pub dates: Dates,

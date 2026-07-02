@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use serde::{ Serialize, Deserialize };
 use http::uri::Uri;
 
-use crate::{ AuthorBuildError, http_opt_uri };
+use crate::{ AuthorBuildError };
 
 /**
  * Holds Author information as described at the below address.
@@ -15,9 +15,9 @@ use crate::{ AuthorBuildError, http_opt_uri };
 pub struct Author {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
     pub url: Option<Uri>,
-    #[serde(rename = "avatar", skip_serializing_if = "Option::is_none", with = "http_opt_uri")]
+    #[serde(rename = "avatar", skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
     pub avatar_url: Option<Uri>
 }
 
