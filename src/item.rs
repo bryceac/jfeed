@@ -1,5 +1,5 @@
 use serde::{ Serialize, Deserialize };
-use url::Url;
+use http::uri::Uri;
 use crate::{ Author, Content, Dates, Attachment, ItemBuildError };
 
 /**

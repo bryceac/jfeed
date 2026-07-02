@@ -1,5 +1,5 @@
 use serde::{ Deserialize, Serialize };
-use url::Url;
+use http::uri::Uri;
 
 use crate::HubError;
 

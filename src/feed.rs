@@ -1,6 +1,6 @@
 use serde::{ Serialize, Deserialize };
 use serde_json::Result as JSONResult;
-use url::Url;
+use http::uri::Uri;
 use crate::{FeedVersion, Author, Item, Hub, FeedBuildError};
 
 /**
