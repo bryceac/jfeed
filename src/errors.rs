@@ -1,6 +1,6 @@
 use std::{ error::Error, fmt };
+use url::ParseError as URLParseError;
 use chrono::format::ParseError as ChronoParseError;
-use http::uri::InvalidUri;
 
 /**
  * The possible errors that can occur when
@@ -11,7 +11,7 @@ pub enum AttachmentBuildError {
     URLNotFound,
     MimetypeNotFound,
     URLAndMimetypeNotFound,
-    URLParseError(InvalidUri)
+    URLParseError(URLParseError)
 }
 
 impl fmt::Display for AttachmentBuildError {
@@ -19,7 +19,8 @@ impl fmt::Display for AttachmentBuildError {
         match self {
             Self::MimetypeNotFound => write!(f, "mimetype must be specified."),
             Self::URLNotFound => write!(f, "URL must be specified."),
-            Self::URLAndMimetypeNotFound => write!(f, "Both URL and mimetype must be specified")
+            Self::URLAndMimetypeNotFound => write!(f, "Both URL and mimetype must be specified"),
+            Self::URLParseError(parse_error) => write!(f, "{}", parse_error)
         }
     }
 }
@@ -31,13 +32,15 @@ impl Error for AttachmentBuildError {}
  */
 #[derive(Debug)]
 pub enum AuthorBuildError {
-    MissingData
+    MissingData,
+    URLParseError(URLParseError)
 }
 
 impl fmt::Display for AuthorBuildError {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> fmt::Result {
         match self {
             Self::MissingData => write!(f, "No data found. Please provide either a name, URL, or avatar URL."),
+            Self::URLParseError(parse_error) => write!(f, "{}", parse_error)
         }
     }
 }
@@ -65,7 +68,7 @@ impl Error for ContentBuildError {}
 #[derive(Debug)]
 pub enum DatesBuildError {
     DateParseError(ChronoParseError),
-    NoDates
+    NoDates,
 }
 
 impl fmt::Display for DatesBuildError {
@@ -92,7 +95,8 @@ pub enum ItemBuildError {
     URLNotFound,
     NoAuthorsFound,
     NoContent,
-    NoDate
+    NoDate,
+    MiscError(URLParseError)
 }
 
 impl fmt::Display for ItemBuildError {
@@ -103,6 +107,7 @@ impl fmt::Display for ItemBuildError {
             Self::NoAuthorsFound => write!(f, "Item must have at least one author."),
             Self::NoContent => write!(f, "Please provide content in plain text or HTML."),
             Self::NoDate => write!(f, "Please provide a publication and/or modification date."),
+            Self::MiscError(parse_error) => write!(f, "{}", parse_error)
         }
     }
 }
@@ -114,7 +119,8 @@ impl Error for ItemBuildError {}
 pub enum HubError {
     NoType,
     NoURL,
-    MissingAll
+    MissingAll,
+    URLError(URLParseError)
 }
 
 impl fmt::Display for HubError {
@@ -122,7 +128,8 @@ impl fmt::Display for HubError {
         match self {
             Self::MissingAll => write!(f, "Hubs must provide a type and a URL"),
             Self::NoURL => write!(f, "Hubs must have a URL."),
-            Self::NoType => write!(f, "Hubs must have a type.")
+            Self::NoType => write!(f, "Hubs must have a type."),
+            Self::URLError(parse_error) => write!(f, "{}", parse_error)
         }
     }
 }
@@ -136,7 +143,8 @@ pub enum FeedBuildError {
     MissingTitle,
     MissingHomePage,
     MissingURL,
-    MissItems
+    MissItems,
+    URLError(URLParseError)
 }
 
 impl fmt::Display for FeedBuildError {
@@ -147,6 +155,7 @@ impl fmt::Display for FeedBuildError {
             Self::MissingHomePage => write!(f, "Feed must have a homepage."),
             Self::MissingURL => write!(f, "Feed must have a URL."),
             Self::MissItems => write!(f, "Feed must contain at least 1 item."),
+            Self::URLError(parse_error) => write!(f, "{}", parse_error)
         }
     }
 }
