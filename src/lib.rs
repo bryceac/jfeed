@@ -837,6 +837,7 @@ mod tests {
         .add_author(&author)
         .set_content(&content)
         .build().unwrap();
+    
         builder.add_item(&item);
         let feed = builder.build().unwrap();
 
