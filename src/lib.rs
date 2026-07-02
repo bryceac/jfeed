@@ -7,6 +7,7 @@ mod hub;
 mod feed;
 mod version;
 mod errors;
+mod http_opt_uri;
 
 pub use crate::{
     attachment::Attachment as Attachment, 
