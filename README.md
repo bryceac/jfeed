@@ -14,6 +14,18 @@ This crate has been tested on Rust 1.93 on macOS Tahoe. It is not known if it wi
 
 ### Version History
 
+<dl>
+<dt style="font-weight:bold">0.1</dt>
+<dd>
+<p>Initial release.</p>
+<p>Released 6/30/2026</p>
+</dd>
+<dt style="font-weight:bold">0.1.1</dt>
+<dd>
+<p>Change URL types to URI, to allow for relative URLs.</p>
+<p>Released 7/2/2026</p>
+</dd>
+</dl>
 
 
 ### Questions
