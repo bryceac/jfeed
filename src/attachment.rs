@@ -14,7 +14,7 @@ use crate::AttachmentBuildError;
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Attachment {
     /// The attachment's URL
-    #[serde(with = "http_serde::uri")]
+    #[serde(with = "http_serde_ext::uri")]
     pub url: Uri,
     /// The mimetype for the attached item
     pub mime_type: String,

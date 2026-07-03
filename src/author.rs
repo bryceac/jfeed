@@ -15,9 +15,9 @@ use crate::{ AuthorBuildError };
 pub struct Author {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
     pub url: Option<Uri>,
-    #[serde(rename = "avatar", skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
+    #[serde(rename = "avatar", skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
     pub avatar_url: Option<Uri>
 }
 

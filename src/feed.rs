@@ -10,22 +10,22 @@ use crate::{FeedVersion, Author, Item, Hub, FeedBuildError };
  */
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Feed {
-    #[serde(with = "http_serde::uri")]
+    #[serde(with = "http_serde_ext::uri")]
     pub version: Uri,
     pub title: String,
-    #[serde(rename ="home_page_url", with = "http_serde::uri")]
+    #[serde(rename ="home_page_url", with = "http_serde_ext::uri")]
     pub home_page: Uri,
-    #[serde(rename = "feed_url", with = "http_serde::uri")]
+    #[serde(rename = "feed_url", with = "http_serde_ext::uri")]
     pub url: Uri,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
     #[serde(rename = "user_comment", skip_serializing_if = "Option::is_none")]
     pub comment: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
+    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
     pub next_url: Option<Uri>,
-    #[serde(rename = "icon", skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
+    #[serde(rename = "icon", skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
     pub icon_url: Option<Uri>,
-    #[serde(rename = "favicon", skip_serializing_if = "Option::is_none", with = "http_serde::uri")]
+    #[serde(rename = "favicon", skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
     pub favicon_url: Option<Uri>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub authors: Vec<Author>,

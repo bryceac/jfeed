@@ -12,7 +12,7 @@ use crate::HubError;
 pub struct Hub {
     #[serde(rename = "type")]
     pub hub_type: String,
-    #[serde(with = "http_serde::uri")]
+    #[serde(with = "http_serde_ext::uri")]
     pub url: Uri
 }
 
