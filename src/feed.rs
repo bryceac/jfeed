@@ -21,11 +21,11 @@ pub struct Feed {
     pub description: Option<String>,
     #[serde(rename = "user_comment", skip_serializing_if = "Option::is_none")]
     pub comment: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
+    #[serde(default, skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
     pub next_url: Option<Uri>,
-    #[serde(rename = "icon", skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
+    #[serde(default, rename = "icon", skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
     pub icon_url: Option<Uri>,
-    #[serde(rename = "favicon", skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
+    #[serde(default, rename = "favicon", skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
     pub favicon_url: Option<Uri>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub authors: Vec<Author>,

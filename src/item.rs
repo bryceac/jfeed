@@ -12,7 +12,7 @@ pub struct Item {
     pub id: String,
     #[serde(with = "http_serde_ext::uri")]
     pub url: Uri,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
+    #[serde(default, skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
     pub external_url: Option<Uri>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub title: Option<String>,
@@ -20,9 +20,9 @@ pub struct Item {
     pub content: Content,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub summary: Option<String>,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
+    #[serde(default, skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
     pub image_url: Option<Uri>,
-    #[serde(skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
+    #[serde(default, skip_serializing_if = "Option::is_none", with = "http_serde_ext::uri::option")]
     pub banner_url: Option<Uri>,
     #[serde(flatten)]
     pub dates: Dates,
